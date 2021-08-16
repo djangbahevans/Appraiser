@@ -15,8 +15,8 @@ async def read_competency_details(appraisal_form_id: int, db: Session = Depends(
 
 
 @router.get("/performancedetails/")
-async def read_performance_details(db: Session = Depends(get_db)):
-    return await crud.read_performance_details(db)
+async def read_performance_details(appraisal_form_id: int, db: Session = Depends(get_db)):
+    return await crud.read_performance_details(appraisal_form_id, db)
 
 
 # @router.get("/annualappraisal/")

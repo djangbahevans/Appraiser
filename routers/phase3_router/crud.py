@@ -24,8 +24,9 @@ async def read_competency_details(appraisal_form_id, db: Session):
     return res
 
 
-async def read_performance_details(db: Session):
-    res = db.execute("""SELECT * FROM public.performance_details;""")
+async def read_performance_details(appraisal_form_id, db: Session):
+    res = db.execute("""SELECT * FROM public.performance_details  where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
     res = res.fetchall()
     return res
 
