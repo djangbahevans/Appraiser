@@ -1,90 +1,115 @@
+from ..auth_router.crud import UnAuthorised, is_token_blacklisted, utils, HTTPException, jwt
+from fastapi import Depends, HTTPException, Response, status, Body, Header
 from fastapi import Depends, HTTPException, BackgroundTasks
 from starlette.responses import JSONResponse
+from datetime import datetime, date
 from sqlalchemy.orm import Session
-from . import schemas
+from . import models, schemas
+from .. import email
+from typing import List
+# READ END OF YEAR REVIEW
 
-async def read_end_of_year_review(db:Session):
-    res = db.execute("""SELECT assessment, score, comment, appraisal_form_id, endofyear_review_id, annual_plan_id, weight
-	FROM public.endofyear_review;""")
-    res = res.fetchall()
-    return res
- 
-async def read_core_competencies(db:Session):
-    res = db.execute("""SELECT category, weight, sub, main, competency_id, annual_appraisal_id, grade
-	FROM public.competency;""")
-    res = res.fetchall()
-    return res
 
-async def read_annual_appraisal(db:Session):
-    res = db.execute("""SELECT comment, field, appraisal_form_id, status, annual_appraisal_id FROM public.annual_appraisal;""")
+async def read_overall_performance(db: Session):
+    res = db.execute("""SELECT * FROM public.overall_performance;""")
     res = res.fetchall()
     return res
 
 
-async def create_end_of_year_review(assessment, score, comment, appraisal_form_id, annual_plan_id, weight, staff_id, db: Session):
-    res = db.execute("""INSERT INTO public.endofyear_review(assessment, score, comment, appraisal_form_id, annual_plan_id, weight)
-    values(:assessment, :score, :comment, :appraisal_form_id, :annual_plan_id, :weight, :staff_id);""",
-    {'assessment':assessment, 'score':score, 'comment':comment, 'appraisal_form_id':appraisal_form_id, 'annual_plan_id':annual_plan_id, 'weight':weight})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "end of year review has been created"})
-
-async def create_core_competencies(annual_appraisal_id, grade, db:Session):
-    res = db.execute("""INSERT INTO public.competency(annual_appraisal_id, grade)
-    values(:annual_appraisal_id, :grade);""",
-    {'annual_appraisal_id':grade, 'grade':grade})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "core competency has been created"})
-
-async def create_annual_appraisal(comment, field, appraisal_form_id, db:Session):
-    res = db.execute("""insert into public.annual_appraisal(comment, field, appraisal_form_id)
-    values(:comment, :field, :appraisal_form_id);""",
-    {'comment':comment,'field':field, 'appraisal_form_id':appraisal_form_id})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "annual appraisal has been created"})
+async def read_competency_details(db: Session):
+    res = db.execute("""SELECT * FROM public.competency_details;""")
+    res = res.fetchall()
+    return res
 
 
-async def update_end_of_year_review(end_of_year_review: schemas.update_end_of_year_review, db: Session):
-    res = db.execute("""UPDATE public.endofyear_review
-	SET assessment = :assessment, score = :score, comment = :comment, appraisal_form_id = :appraisal_form_id, endofyear_review_id = :endofyear_review_id, annual_plan_id = :annual_plan_id, weight = :weight
-	WHERE endofyear_review_id = :endofyear_review_id;""",
-    {'assessment':assessment, 'score':score, 'comment':comment, 'appraisal_form_id':appraisal_form_id, 'annual_plan_id':annual_plan_id, 'endofyear_review_id':endofyear_review_id, 'weight':weight})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "end of year review has been updated"})
-
-async def update_core_competencies(core_competencies: schemas.update_core_competencies, db: Session):
-    res = db.execute("""UPDATE public.competency
-	SET annual_appraisal_id = :annual_appraisal_id, competency_id = :competency_id, grade = :grade
-	WHERE competency_id = :competency_id;""",
-    {'annual_appraisal_id':annual_appraisal_id, 'competency_id':competency_id, 'grade':grade})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "core competency has been updated"})
-
-async def update_annual_appraisal(annual_appraisal: schemas.create_annual_appraisal, db: Session):
-    res = db.execute("""UPDATE public.annual_appraisal
-	SET grade = comment = :comment, field = :field, appraisal_form_id = :appraisal_form_id, annual_appraisal_id = :annual_appraisal_id
-	WHERE annual_appraisal_id = :annual_appraisal_id;""",
-    {'comment':annual_appraisal.comment, 'field':annual_appraisal.field, 'appraisal_form_id': annual_appraisal.appraisal_form_id, 'annual_appraisal_id':annual_appraisal.annual_appraisal_id})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "annual appraisal has been updated"})
+async def read_performance_details(db: Session):
+    res = db.execute("""SELECT * FROM public.performance_details;""")
+    res = res.fetchall()
+    return res
 
 
-async def delete_end_of_year_review(endofyear_review_id: int, db: Session):
-    res = db.execute("""DELETE FROM public.endofyear_review
-	WHERE endofyear_review_id = :endofyear_review_id;""",
-    {'endofyear_review_id':endofyear_review_id})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "end of year review has been deleted"})
+async def read_competencies(db: Session):
+    res = db.execute(""" SELECT * FROM public.competency; """)
+    res = res.fetchall()
+    return res
 
-async def delete_core_competencies(competency_id: int, db:Session):
-    res = db.execute("""DELETE FROM public.competency
-	WHERE competency_id = :competency_id;""",
-    {'competency_id': competency_id})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "core competency has been deleted"})
 
-async def delete_annual_appraisal(annual_appraisal_id: int, db: Session):
-    res = db.execute("""DELETE FROM public.annual_appraisal
-	WHERE annual_appraisal_id = :annual_appraisal_id;""",
-    {'annual_appraisal_id':annual_appraisal_id})
-    db.commit()
-    return JSONResponse(status_code=200, content={"message": "annual appraisal has been deleted"})
+async def read_endofyear_review(db: Session):
+    res = db.execute(""" SELECT * FROM public.endofyear_review; """)
+    res = res.fetchall()
+    return res
+
+
+# CREATE END OF YEAR REVIEW
+
+async def create_annual_appraisal(payload: schemas.AnnualAppraisal, db: Session):
+    query = db.execute(
+        """ SELECT ending FROM public.deadline WHERE deadline_type = 'End'; """)  # READ DEADLINE FOR PHASE-1
+    query = query.first()[0]
+    if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
+        res = db.execute("""INSERT INTO public.annual_appraisal(
+	                    result_areas, target, resources, appraisal_form_id, submit)
+	                    values(:result_areas, :target, :resources, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do 
+	                    update set result_areas = EXCLUDED.result_areas, target = EXCLUDED.target, resources = EXCLUDED.resources, submit = EXCLUDED.submit; """,
+                         {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+        db.commit()
+        if payload.submit == 1:
+            # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
+            await email.start.approve_annual_plan(payload.appraisal_form_id)
+        else:
+            pass
+
+        return JSONResponse(status_code=200, content={"message": "annual plan has been created"})
+    else:
+        return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
+
+
+async def competence_details(payload: List[schemas.CompDetails],  db: Session):
+
+    query = db.execute(
+        """ SELECT ending FROM public.deadline WHERE deadline_type = 'End'; """)  # READ DEADLINE FOR PHASE-1
+    query = query.first()[0]
+    if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
+        for payload in payload:
+            db.execute("""do $$
+                            BEGIN
+                            FOR i in 1..32 LOOP
+                            INSERT INTO public.competency_details(competency_id, appraisal_form_id, grade, submit)
+                            values(:competency_id, :appraisal_form_id, :grade, :submit)
+                            on conflict (competency_id, appraisal_form_id) do 
+                            update set grade = EXCLUDED.grade, submit = EXCLUDED.submit;
+                            END LOOP;
+                            END;
+                            $$; """,
+                       {'competency_id': payload.competency_id, 'appraisal_form_id': payload.appraisal_form_id, 'grade': payload.grade, 'submit': payload.submit, })  # CREATE INTO TABLE
+            if payload.submit == 1:
+                # SEND COMPETENCE DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
+                # await email.start.approve_annual_plan(appraisal_form_id)
+                # else:
+                pass
+        db.commit()
+
+        return JSONResponse(status_code=200, content={"message": "competence details has been created"})
+    else:
+        return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
+
+
+async def performance_details(appraisal_form_id, weight, comments, final_score, approved_date, submit, db: Session):
+    query = db.execute(
+        """ SELECT ending FROM public.deadline WHERE deadline_type = 'End'; """)  # READ DEADLINE FOR PHASE-1
+    query = query.first()[0]
+    if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
+        res = db.execute("""INSERT INTO public.performance_details(appraisal_form_id, weight, comments, final_score, approved_date, submit)
+	                            values(:appraisal_form_id, :weight, :comments, :final_score, :approved_date, :submit) on conflict (appraisal_form_id) do 
+	                                update set weight = EXCLUDED.weight, comments = EXCLUDED.comments, final_score = EXCLUDED.final_score, approved_date = EXCLUDED.approved_date, submit = EXCLUDED.submit; """,
+                         {'appraisal_form_id': appraisal_form_id, 'weight': weight, 'comments': comments, 'final_score': final_score, 'approved_date': approved_date, 'submit': submit})  # CREATE INTO TABLE
+        db.commit()
+        if submit == 1:
+            # SEND PERFORMANCE PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
+            # await email.start.approve_annual_plan(appraisal_form_id)
+            # else:
+            pass
+
+        return JSONResponse(status_code=200, content={"message": "performance details has been created"})
+    else:
+        return JSONResponse(status_code=404, content={"message": "deadline has passed!"})

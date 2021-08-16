@@ -10,8 +10,8 @@ router = APIRouter()
 
 
 @router.get("/competencedetails/")
-async def read_competency_details(db: Session = Depends(get_db)):
-    return await crud.read_competency_details(db)
+async def read_competency_details(appraisal_form_id: int, db: Session = Depends(get_db)):
+    return await crud.read_competency_details(appraisal_form_id, db)
 
 
 @router.get("/performancedetails/")
@@ -19,7 +19,7 @@ async def read_performance_details(db: Session = Depends(get_db)):
     return await crud.read_performance_details(db)
 
 
-@router.get("/annualappraisal/")
+# @router.get("/annualappraisal/")
 async def read_annual_appraisal(db: Session = Depends(get_db)):
     return await crud.read_annual_appraisal(db)
 
@@ -34,7 +34,7 @@ async def end_of_year_review(db: Session = Depends(get_db)):
     return await crud.read_endofyear_review(db)
 
 
-@router.post("/annualappraisal/")
+# @router.post("/annualappraisal/")
 async def create_annual_appraisal(payload: schemas.create_annual_appraisal, db: Session = Depends(get_db)):
     return await crud.create_annual_appraisal(payload, db)
 
