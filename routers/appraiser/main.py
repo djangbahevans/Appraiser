@@ -149,7 +149,7 @@ async def approve_form_details_end(appraisal_form_id: int, type_form='End', toke
     return await crud.approve_form_details_end_auth(appraisal_form_id, type_form, token, db)
 
 
-@router.get("/approvecompetencydetails/{appraisal_form_id}/{competency_id}/")
+@router.post("/approvecompetencydetails/{appraisal_form_id}/{competency_id}/")
 async def approve_competency_details(appraisal_form_id: int, competency_id=int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     return await crud.approve_competency_details_auth(appraisal_form_id, competency_id, token, db)
 
