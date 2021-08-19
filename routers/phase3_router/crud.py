@@ -37,6 +37,13 @@ async def read_competencies(db: Session):
     return res
 
 
+async def read_specific_competency(competency_id, db: Session):
+    res = db.execute(""" SELECT category, sub, main, weight FROM public.competency where competency_id=:competency_id; """, {
+                     'competency_id': competency_id})
+    res = res.fetchall()
+    return res
+
+
 async def read_endofyear_review(db: Session):
     res = db.execute(""" SELECT * FROM public.endofyear_review; """)
     res = res.fetchall()

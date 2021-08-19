@@ -29,6 +29,11 @@ async def read_competencies(db: Session = Depends(get_db)):
     return await crud.read_competencies(db)
 
 
+@router.get("/competencies/{id}/")
+async def read_competency_by_id(competency_id: int, db: Session = Depends(get_db)):
+    return await crud.read_specific_competency(competency_id, db)
+
+
 @router.get("/endofyearreview/")
 async def end_of_year_review(db: Session = Depends(get_db)):
     return await crud.read_endofyear_review(db)
