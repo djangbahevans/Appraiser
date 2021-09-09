@@ -44,8 +44,9 @@ async def read_specific_competency(competency_id, db: Session):
     return res
 
 
-async def read_endofyear_review(db: Session):
-    res = db.execute(""" SELECT * FROM public.endofyear_review; """)
+async def read_endofyear_review(appraisal_form_id, db: Session):
+    res = db.execute(""" SELECT * FROM public.endofyear_review where appraisal_form_id=:appraisal_form_id; """, {
+        'appraisal_form_id': appraisal_form_id})
     res = res.fetchall()
     return res
 
@@ -94,7 +95,7 @@ async def competence_details(payload: List[schemas.CompDetails],  db: Session):
                        {'competency_id': payload.competency_id, 'appraisal_form_id': payload.appraisal_form_id, 'grade': payload.grade, 'submit': payload.submit, })  # CREATE INTO TABLE
             if payload.submit == 1:
                 # SEND COMPETENCE DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-                # await email.start.approve_annual_plan(appraisal_form_id)
+                await email.end.approve_competence_details(payload.appraisal_form_id)
                 # else:
                 pass
         db.commit()
@@ -116,7 +117,7 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
         db.commit()
         if submit == 1:
             # SEND PERFORMANCE PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-            # await email.start.approve_annual_plan(appraisal_form_id)
+            await email.end.approve_performance_details(appraisal_form_id)
             # else:
             pass
 

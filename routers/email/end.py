@@ -24,6 +24,8 @@ from static.email_templates.template_38 import template38
 from static.email_templates.template_39 import template39
 from static.email_templates.template_40 import template40
 from static.email_templates.template_41 import template41
+from static.email_templates.template_42 import template42
+from static.email_templates.template_43 import template43
 
 USE_CREDENTIALS = settings.USE_CREDENTIALS
 router = APIRouter()
@@ -306,10 +308,35 @@ async def background_send_36(user_hash_list) -> JSONResponse:
             subject="Approve End-Year Review",
             recipients=[item[9]],
             body=template35.format(email=[item[0]], progress_review=[item[1]], lastname=[item[2]], staff_id=[item[3]], firstname=[item[4]], remarks=[
-                                   item[5]], middlename=[item[6]], competency=[item[7]], appraisal_form_id=[item[8]], supervisor_email=[item[9]]),
+                                   item[5]], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
             subtype="html"
         )
         await fm.send_message(message)
+
+
+async def background_send_99(user_hash_list) -> JSONResponse:
+    for item in user_hash_list:
+        message = MessageSchema(
+            subject="Approve Competence Details",
+            recipients=[item[6]],
+            body=template42.format(email=item[0], lastname=[item[1]], staff_id=[item[2]], firstname=[
+                                   item[3]], middlename=[item[4]], appraisal_form_id=[item[5]], supervisor_email=[item[6]]),
+            subtype="html"
+        )
+        await fm.send_message(message)
+
+
+async def background_send_98(user_hash_list) -> JSONResponse:
+    for item in user_hash_list:
+        message = MessageSchema(
+            subject="Approve Performance Details",
+            recipients=[item[6]],
+            body=template43.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
+            subtype="html"
+        )
+        await fm.send_message(message)
+
 
 # EMAIL ENDPOINTS FOR MANUALLY SENT EMAILS
 
@@ -450,6 +477,20 @@ async def approve_end_year_review(appraisal_form_id):
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_36(res)
+
+
+async def approve_competence_details(appraisal_form_id):
+    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+    res = res.fetchall()
+    return await background_send_99(res)
+
+
+async def approve_performance_details(appraisal_form_id):
+    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+    res = res.fetchall()
+    return await background_send_98(res)
 
 # @router.post("/endyearreviewapproved/")
 
