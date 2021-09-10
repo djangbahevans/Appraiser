@@ -36,21 +36,16 @@ template37 = """
 
                 <img alt="aiti.png" src="https://www.aiti-kace.com.gh/sites/default/files/aiti.png" style="width:199px;height:69px;">
        
-                <h3> <p>Dear Sir/Madam,</p> </h3>
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
-                        <p>Your End-Year Review forms have been inspected and approved by your supervisor.</p>
+                        <p>Your Competency Details have been inspected and approved by your supervisor.</p>
 
                         <p></p>
-
-                        <strong><p>View the form details to keep track of its progress.</strong></br>
                         
-                                    progress review = {progress_review}</br>
-                                    remarks = {remarks}</br>
-                                    competency = {competency}</br>
-                                    appraisal form id = {appraisal_form_id} </p></br>
+
 
                         You are eligible to start the next phase which is the 
-                        <strong>End of Year Review forms </strong> <br/>
+                        <strong>Performance Details </strong> <br/>
 
                         Thank You. <br/>
                         Appraiser-App Admin

@@ -767,16 +767,17 @@ async def approve_form_details_end_auth(appraisal_form_id: int, type_form: str, 
 
 
 async def approve_competncy_details(appraisal_form_id: int, competency_id: int, db: Session):
+
     res = db.execute("""SELECT public.approve_competency_details(:appraisal_form_id, :competency_id) """, {
-                     'appraisal_form_id': appraisal_form_id, 'competency_id': competency_id})  # APPROVE FROM DB FUNCTION
+        'appraisal_form_id': appraisal_form_id, 'competency_id': competency_id})  # APPROVE FROM DB FUNCTION
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    await email.end.end_year_review_approved(appraisal_form_id)
+    await email.end.competency_details_approved(appraisal_form_id)
     return res
 
 
-async def approve_competency_details_auth(appraisal_form_id: int, competency_id: int, token: str, db: Session):
+async def approve_competency_details_auth(appraisal_form_id: int, competency_id: int,  token: str, db: Session):
     try:
         if await is_token_blacklisted(token, db):
             raise UnAuthorised('token blacklisted')
@@ -887,12 +888,13 @@ async def disapprove_form_details_end_auth(appraisal_form_id: int, type_form: st
 
 
 async def disapprove_competency_details(appraisal_form_id: int, competency_id: int, comments: str,  db: Session):
+
     res = db.execute(""" SELECT public.disapprove_competency_details(:appraisal_form_id, :competency_id, :comments) """, {
-                     'appraisal_form_id': appraisal_form_id, 'competency_id': competency_id, 'comments': comments})  # APPROVE FROM DB FUNCTION
+        'appraisal_form_id': appraisal_form_id, 'competency_id': competency_id, 'comments': comments})  # APPROVE FROM DB FUNCTION
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.end.end_year_review_disapproved(appraisal_form_id)
+    await email.end.competency_details_disapproved(appraisal_form_id)
     return res
 
 

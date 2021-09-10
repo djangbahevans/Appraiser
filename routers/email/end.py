@@ -278,10 +278,10 @@ async def background_send_31(user_hash_list) -> JSONResponse:
 async def background_send_32(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
-            subject="End-Year Review Approved",
+            subject="Competency Details Approved",
             recipients=[item[0]],
-            body=template37.format(email=[item[0]], progress_review=[item[1]], lastname=[item[2]], staff_id=[item[3]], firstname=[item[4]], remarks=[
-                                   item[5]], middlename=[item[6]], competency=[item[7]], appraisal_form_id=[item[8]], supervisor_email=[item[9]]),
+            body=template37.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -291,14 +291,13 @@ async def background_send_32(user_hash_list) -> JSONResponse:
 async def background_send_38(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
-            subject="Form Disaproved",
+            subject="Competency Details Disapproved",
             recipients=[item[0]],
-            body=template36.format(email=[item[0]], progress_review=[item[1]], lastname=[item[2]], staff_id=[item[3]], firstname=[item[4]], remarks=[
-                                   item[5]], middlename=[item[6]], competency=[item[7]], appraisal_form_id=[item[8]], supervisor_email=[item[9]], endyear_review_comment=[item[10]]),
+            body=template36.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
             subtype="html"
         )
         await fm.send_message(message)
-
 # APPROVE END-YEAR REVIEW
 
 
@@ -496,8 +495,8 @@ async def approve_performance_details(appraisal_form_id):
 
 
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
-async def end_year_review_approved(appraisal_form_id):
-    res = db.execute(""" SELECT email, progress_review, lastname, staff_id, firstname, remarks, middlename, competency, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+async def competency_details_approved(appraisal_form_id):
+    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_32(res)
@@ -506,12 +505,11 @@ async def end_year_review_approved(appraisal_form_id):
 
 
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
-async def end_year_review_disapproved(appraisal_form_id):
-    res = db.execute(""" SELECT email, progress_review, lastname, staff_id, firstname, remarks, middlename, competency, appraisal_form_id, supervisor_email, endyear_review_comment FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+async def competency_details_disapproved(appraisal_form_id):
+    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_38(res)
-
 # @router.post("/lastfivedaystoapprovereminder/")
 
 

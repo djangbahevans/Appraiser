@@ -8,6 +8,25 @@ from uuid import UUID
 import datetime
 
 
+class DisapproveCompetencyDetails(BaseModel):
+    appraisal_form_id: int
+    competency_id: int
+    comments: str
+
+
+class disapprove_competency_details(DisapproveCompetencyDetails):
+    pass
+
+
+class ApproveCompetencyDetails(BaseModel):
+    appraisal_form_id: int
+    competency_id: int
+
+
+class approve_competency_details(ApproveCompetencyDetails):
+    pass
+
+
 class Auth(UserBase):
     password: str
 
