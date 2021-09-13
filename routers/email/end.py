@@ -294,7 +294,7 @@ async def background_send_38(user_hash_list) -> JSONResponse:
             subject="Competency Details Disapproved",
             recipients=[item[0]],
             body=template36.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], comments=item[7]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -307,7 +307,7 @@ async def background_send_36(user_hash_list) -> JSONResponse:
             subject="Approve End-Year Review",
             recipients=[item[9]],
             body=template35.format(email=[item[0]], progress_review=[item[1]], lastname=[item[2]], staff_id=[item[3]], firstname=[item[4]], remarks=[
-                                   item[5]], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
+                item[5]], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -319,7 +319,7 @@ async def background_send_99(user_hash_list) -> JSONResponse:
             subject="Approve Competence Details",
             recipients=[item[6]],
             body=template42.format(email=item[0], lastname=[item[1]], staff_id=[item[2]], firstname=[
-                                   item[3]], middlename=[item[4]], appraisal_form_id=[item[5]], supervisor_email=[item[6]]),
+                item[3]], middlename=[item[4]], appraisal_form_id=[item[5]], supervisor_email=[item[6]]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -342,7 +342,7 @@ async def background_send_98(user_hash_list) -> JSONResponse:
 # SEND END-YEAR LINK TO ALL STAFF
 
 
-@router.post("/endyearreviewemail/")
+@ router.post("/endyearreviewemail/")
 async def start_endyear_review_(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute("""SELECT * FROM public.hash_table""")
     res = res.fetchall()
@@ -351,17 +351,17 @@ async def start_endyear_review_(background_tasks: BackgroundTasks, db: Session =
 # SEND END-YEAR LINK TO INDIVIDUAL STAFF
 
 
-@router.post("/endyearreviewemailstaff/")
+@ router.post("/endyearreviewemailstaff/")
 async def end_year_review_staff(email: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute("""SELECT email, hash FROM public.hash_table where email=:email""", {
-                     'email': email})  # SELECT EMAIL AND HASH PAIR FROM HASH TABLE
+        'email': email})  # SELECT EMAIL AND HASH PAIR FROM HASH TABLE
     res = res.fetchall()
     return await background_send_37(res, background_tasks)
 
 # SEND REMINDER TO SUPERVISORS TO APPROVE SUBMITTED END-YEAR REVIEW FORMS
 
 
-@router.post("/approveendyearreview/")
+@ router.post("/approveendyearreview/")
 async def approve_completed_end_year_review(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")  # SELECT EMAIL FROM WAITING APPROVAL FUNCTION
@@ -371,7 +371,7 @@ async def approve_completed_end_year_review(background_tasks: BackgroundTasks, d
 # SEND END-YEAR DETAILS TO APPROVED
 
 
-@router.post("/endformdetails/")
+@ router.post("/endformdetails/")
 # SEND FORM DETAILS TO APPROVED STAFF
 async def send_endyear_review_details_to_approved(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute(
@@ -382,10 +382,10 @@ async def send_endyear_review_details_to_approved(background_tasks: BackgroundTa
 # REMIND APPRAISEE TO CHECK EMAIL WITH LINK FOR END-YEAR REVIEW
 
 
-@router.post("/endyearreviewreminder/{supervisor}/")
+@ router.post("/endyearreviewreminder/{supervisor}/")
 async def start_endyear_review_reminder(background_tasks: BackgroundTasks, supervisor: int, db: Session = Depends(get_db)):
     res = db.execute("""select email, progress_review, remarks, competency from public.view_users_form_details where supervisor=:supervisor and end_status=0 and progress_review is null and remarks is null and competency is null""", {
-                     'supervisor': supervisor})  # SELECT EMAIL AND HASH PAIR FROM HASH TABLE
+        'supervisor': supervisor})  # SELECT EMAIL AND HASH PAIR FROM HASH TABLE
     res = res.fetchall()
     return await background_send_46(res, background_tasks)
 
@@ -473,21 +473,21 @@ async def last_day_to_end_reminder():
 # TAKE APPRAISAL FORM ID FROM "create_end_year_review" FUNCTION IN phase_2 Router, crud.py
 async def approve_end_year_review(appraisal_form_id):
     res = db.execute(""" SELECT email, progress_review, lastname, staff_id, firstname, remarks, middlename, competency, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_36(res)
 
 
 async def approve_competence_details(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_99(res)
 
 
 async def approve_performance_details(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_98(res)
 
@@ -497,7 +497,7 @@ async def approve_performance_details(appraisal_form_id):
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
 async def competency_details_approved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
+        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_32(res)
 
@@ -507,8 +507,11 @@ async def competency_details_approved(appraisal_form_id):
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
 async def competency_details_disapproved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-                     'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
+        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
+    com = db.execute("""SELECT competency_details FROM public.supervisor_comment where appraisal_form_id=:appraisal_form_id """, {
+        'appraisal_form_id': appraisal_form_id})
+    com = com.fetchall()
     return await background_send_38(res)
 # @router.post("/lastfivedaystoapprovereminder/")
 
