@@ -1,5 +1,5 @@
 
-template20 =  """
+template20 = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
@@ -44,11 +44,11 @@ template20 =  """
                         <p>Please refill the form to withrespect to your supervisor's comment for approval.</p>
 
                         <strong><p>View your form details and comments from your supervisor.</strong></br>
-                                    target = {target}</br>
-                                    resources = {resources}</br>
-                                    result areas = {result_areas}</br>
-                                    appraisal form id = {appraisal_form_id}</br>
-                                    supervisor's comment = {annual_plan_comment} </p></br>
+                                    target - {target}</br>
+                                    resources - {resources}</br>
+                                    result areas - {result_areas}</br>
+                                    appraisal form id - {appraisal_form_id}</br>
+                                    supervisor's comment - {annual_plan_comment} </p></br>
 
 
                         The forms will be avilable untill the deadline for phase-1 is reached

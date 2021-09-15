@@ -1,5 +1,5 @@
 
-template19 =  """
+template19 = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
@@ -43,9 +43,9 @@ template19 =  """
                         <p>Follow the link in the mail that was sent earlier this year to complete the start of year details.</p>
 
                         <strong><p>You are expected to complete the form for your supervisor's approval.</strong></br>
-                                    target = {target}</br>
-                                    resources = {resources}</br>
-                                    result areas = {result_areas} </p></br>
+                                    target - {target}</br>
+                                    resources - {resources}</br>
+                                    result areas - {result_areas} </p></br>
 
 
                         The forms will be avilable untill the start of the

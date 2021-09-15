@@ -46,10 +46,10 @@ template39 = """
 
                         <strong><p>View the form details to keep track of its progress.</strong></br>
                         
-                                    progress_review = {progress_review}</br>
-                                    remarks = {remarks}</br>
-                                    competency = {competency}</br>
-                                    appraisal form id = {appraisal_form_id} </p></br>
+                                    progress_review - {progress_review}</br>
+                                    remarks - {remarks}</br>
+                                    competency - {competency}</br>
+                                    appraisal form id - {appraisal_form_id} </p></br>
 
                         The forms will be avilable untill the start of the
                         <strong>Decision Making process  </strong> <br/>

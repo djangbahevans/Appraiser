@@ -1,5 +1,5 @@
 
-template26 =  """
+template26 = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
@@ -45,10 +45,10 @@ template26 =  """
 
                         <strong><p>View the form details to keep track of its progress.</strong></br>
                         
-                                    target = {target}</br>
-                                    resources = {resources}</br>
-                                    result areas = {result_areas}</br>
-                                    appraisal form id = {appraisal_form_id} </p></br>
+                                    target - {target}</br>
+                                    resources - {resources}</br>
+                                    result areas - {result_areas}</br>
+                                    appraisal form id - {appraisal_form_id} </p></br>
 
                         The forms will be avilable untill the start of the
                         <strong>Mid-Year Review process  </strong> <br/>

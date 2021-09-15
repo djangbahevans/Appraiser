@@ -49,10 +49,10 @@ template35 = """
 
                     <strong><p>Kindly review the form details.</strong></br>
                                
-                                    progress_review = {progress_review}</br>
-                                    remarks = {remarks}</br>
-                                    competency = {competency}</br>
-                                    appraisal form id = {appraisal_form_id} </p></br>
+                                    progress_review - {progress_review}</br>
+                                    remarks - {remarks}</br>
+                                    competency - {competency}</br>
+                                    appraisal form id - {appraisal_form_id} </p></br>
 
 
                     You are expected to review and approve the form details

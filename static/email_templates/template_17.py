@@ -48,10 +48,10 @@ template17 = """
 
                     <strong><p>Kindly review the form details.</strong></br>
                                
-                                    target = {target}</br>
-                                    resources = {resources}</br>
-                                    result areas = {result_areas}</br>
-                                    appraisal form id = {appraisal_form_id} </p></br>
+                                    target - {target}</br>
+                                    resources - {resources}</br>
+                                    result areas - {result_areas}</br>
+                                    appraisal form id - {appraisal_form_id} </p></br>
 
 
                     You are expected to review and provide your verdict of the form details
