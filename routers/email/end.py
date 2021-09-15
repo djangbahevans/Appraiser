@@ -79,8 +79,8 @@ async def background_send_39(user_hash_list, background_tasks) -> JSONResponse:
         message = MessageSchema(
             subject="Approve Appraisee Forms",
             recipients=[item["supervisor_email"]],
-            body=template37.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], supervisor=[item["supervisor"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template37.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"], remarks=item["remarks"],
+                                   middlename=item["middlename"], supervisor=item["supervisor"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -107,8 +107,8 @@ async def background_send_41(user_hash_list, background_tasks) -> JSONResponse:
         message = MessageSchema(
             subject="End-Year Review Details",
             recipients=[item["email"]],
-            body=template40.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], supervisor=[item["supervisor"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template40.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"], remarks=item["remarks"],
+                                   middlename=item["middlename"], supervisor=item["supervisor"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -121,8 +121,8 @@ async def background_send_46(user_hash_list, background_tasks) -> JSONResponse:
         message = MessageSchema(
             subject="Reminder To Start End-Year Review",
             recipients=[item[0]],
-            body=template41.format(progress_review=[item[1]], remarks=[
-                                   item[2]], competency=[item[3]]),
+            body=template41.format(
+                progress_review=item[1], remarks=item[2], competency=item[3]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -218,8 +218,8 @@ async def background_send_27(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review (Last Five Days Reminder)",
             recipients=[item["supervisor_email"]],
-            body=template39.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template39.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   remarks=item["remarks"], middlename=item["middlename"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -230,8 +230,8 @@ async def background_send_28(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review (Last Four Days Reminder)",
             recipients=[item["supervisor_email"]],
-            body=template39.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template39.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   remarks=item["remarks"], middlename=item["middlename"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -242,8 +242,8 @@ async def background_send_29(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review (Last Three Days Reminder)",
             recipients=[item["supervisor_email"]],
-            body=template39.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template39.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   remarks=item["remarks"], middlename=item["middlename"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -254,8 +254,8 @@ async def background_send_30(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review (Last Two Days Reminder)",
             recipients=[item["supervisor_email"]],
-            body=template39.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template39.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   remarks=item["remarks"], middlename=item["middlename"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -266,8 +266,8 @@ async def background_send_31(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review (Last Day Reminder)",
             recipients=[item["supervisor_email"]],
-            body=template39.format(email=[item["email"]], progress_review=[item["progress_review"]], lastname=[item["lastname"]], staff_id=[item["staff_id"]], firstname=[item["firstname"]], remarks=[
-                                   item["remarks"]], middlename=[item["middlename"]], competency=[item["competency"]], supervisor_email=[item["supervisor_email"]], appraisal_form_id=[item["appraisal_form_id"]]),
+            body=template39.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   remarks=item["remarks"], middlename=item["middlename"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -306,8 +306,8 @@ async def background_send_36(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve End-Year Review",
             recipients=[item[9]],
-            body=template35.format(email=[item[0]], progress_review=[item[1]], lastname=[item[2]], staff_id=[item[3]], firstname=[item[4]], remarks=[
-                item[5]], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
+            body=template35.format(email=item[0], progress_review=item[1], lastname=item[2], staff_id=item[3], firstname=item[4],
+                                   remarks=item[5], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -318,8 +318,8 @@ async def background_send_99(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Approve Competence Details",
             recipients=[item[6]],
-            body=template42.format(email=item[0], lastname=[item[1]], staff_id=[item[2]], firstname=[
-                item[3]], middlename=[item[4]], appraisal_form_id=[item[5]], supervisor_email=[item[6]]),
+            body=template42.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -513,6 +513,7 @@ async def competency_details_disapproved(appraisal_form_id):
         'appraisal_form_id': appraisal_form_id})
     com = com.fetchall()
     return await background_send_38(res)
+
 # @router.post("/lastfivedaystoapprovereminder/")
 
 
