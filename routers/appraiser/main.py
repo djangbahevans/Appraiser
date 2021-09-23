@@ -28,7 +28,7 @@ async def read_approved_forms_mid(user_id: int, token: str = Depends(oauth2_sche
 
 @router.get("/approved/end/")
 async def read_approved_forms_end(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    return await crud.read_approved_forms_auth(user_id, token, db)
+    return await crud.read_approved_forms_end_auth(user_id, token, db)
 
 
 # GET DISAPPROVED
