@@ -773,7 +773,7 @@ async def approve_competncy_details(appraisal_form_id: int, competency_id: int, 
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    await email.end.competency_details_approved(appraisal_form_id)
+    # await email.end.competency_details_approved(appraisal_form_id)
     return res
 
 
