@@ -9,8 +9,8 @@ import datetime
 
 
 class DisapproveCompetencyDetails(BaseModel):
-    appraisal_form_id: int
-    competency_id: int
+    # appraisal_form_id: int
+    # competency_id: int
     comments: str
 
 
