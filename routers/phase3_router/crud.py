@@ -117,7 +117,7 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
         db.commit()
         if submit == 1:
             # SEND PERFORMANCE PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-            # await email.end.approve_performance_details(appraisal_form_id)
+            await email.end.approve_performance_details(appraisal_form_id)
             # else:
             pass
 
