@@ -66,8 +66,8 @@ async def create_annual_appraisal(payload: schemas.AnnualAppraisal, db: Session)
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-            await email.start.approve_annual_plan(payload.appraisal_form_id)
-        else:
+            # await email.start.approve_annual_plan(payload.appraisal_form_id)
+            # else:
             pass
 
         return JSONResponse(status_code=200, content={"message": "annual plan has been created"})
