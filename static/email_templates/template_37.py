@@ -38,14 +38,14 @@ template37 = """
        
                 <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
-                        <p>Your Competency Details have been inspected and approved by your supervisor.</p>
+                        <p>Your End of Year Details have been inspected and approved by your supervisor.</p>
 
                         <p></p>
                         
 
 
-                        You are eligible to start the next phase which is the 
-                        <strong>Performance Details </strong> <br/>
+                        You have now completed this year's
+                        <strong>Performance Assessment. </strong> <br/>
 
                         Thank You. <br/>
                         Appraiser-App Admin

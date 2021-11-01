@@ -684,7 +684,7 @@ async def approve_form(appraisal_form_id: int, type_form: str, db: Session):
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.start.annual_plan_approved(appraisal_form_id)
+    await email.start.annual_plan_approved(appraisal_form_id)
     return res
 
 
@@ -744,7 +744,7 @@ async def approve_form_end(appraisal_form_id: int, type_form: str, db: Session):
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.main.end_year_review_approved(appraisal_form_id)
+    await email.main.end_year_review_approved(appraisal_form_id)
     return res
 
 
@@ -805,7 +805,7 @@ async def disapprove_form(appraisal_form_id: int, type_form: str, comment: str, 
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.start.annual_plan_disapproved(appraisal_form_id)
+    await email.start.annual_plan_disapproved(appraisal_form_id)
     return res
 
 
@@ -835,7 +835,7 @@ async def disapprove_form_mid(appraisal_form_id: int, type_form: str, comment: s
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.mid.mid_year_review_disapproved(appraisal_form_id)
+    await email.mid.mid_year_review_disapproved(appraisal_form_id)
     return res
 
 
@@ -865,7 +865,7 @@ async def disapprove_form_end(appraisal_form_id: int, type_form: str, comment: s
     res = res.fetchall()
     db.commit()
     # SEND APPROVED ANNUAL PLAN DETAILS TO STAFF'S EMAIL
-    # await email.main.end_year_review_disapproved(appraisal_form_id)
+    await email.main.end_year_review_disapproved(appraisal_form_id)
     return res
 
 

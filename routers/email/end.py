@@ -79,8 +79,8 @@ async def background_send_39(user_hash_list, background_tasks) -> JSONResponse:
         message = MessageSchema(
             subject="Approve Appraisee Forms",
             recipients=[item["supervisor_email"]],
-            body=template37.format(email=item["email"], progress_review=item["progress_review"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"], remarks=item["remarks"],
-                                   middlename=item["middlename"], supervisor=item["supervisor"], competency=item["competency"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
+            body=template37.format(email=item["email"], lastname=item["lastname"], staff_id=item["staff_id"], firstname=item["firstname"],
+                                   middlename=item["middlename"], supervisor_email=item["supervisor_email"], appraisal_form_id=item["appraisal_form_id"]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -305,9 +305,9 @@ async def background_send_36(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
             subject="Approve End-Year Review",
-            recipients=[item[9]],
-            body=template35.format(email=item[0], progress_review=item[1], lastname=item[2], staff_id=item[3], firstname=item[4],
-                                   remarks=item[5], middlename=item[6], competency=item[7], appraisal_form_id=item[8], supervisor_email=item[9]),
+            recipients=[item[6]],
+            body=template35.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -472,8 +472,10 @@ async def last_day_to_end_reminder():
 # @router.post("/approveendyearreview/")
 # TAKE APPRAISAL FORM ID FROM "create_end_year_review" FUNCTION IN phase_2 Router, crud.py
 async def approve_end_year_review(appraisal_form_id):
-    res = db.execute(""" SELECT email, progress_review, lastname, staff_id, firstname, remarks, middlename, competency, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
-        'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email from public.view_end
+                        where appraisal_form_id=:appraisal_form_id and comments is  not null and weight is not  null and final_score is not  null and submit=1  """,
+                     {
+                         'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_36(res)
 
