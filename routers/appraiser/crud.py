@@ -815,7 +815,7 @@ async def disapprove_form_details_auth(appraisal_form_id: int, type_form: str,  
             raise UnAuthorised('token blacklisted')
         token_data = utils.decode_token(data=token)
         if token_data:
-            return await disapprove_competency_details(appraisal_form_id, type_form, comment, db)
+            return await disapprove_form(appraisal_form_id, type_form, comment, db)
     except UnAuthorised:
         raise HTTPException(status_code=401, detail="{}".format(
             sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
