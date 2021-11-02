@@ -26,7 +26,7 @@ from static.email_templates.template_40 import template40
 from static.email_templates.template_41 import template41
 from static.email_templates.template_42 import template42
 from static.email_templates.template_43 import template43
-from static.email_templates.template_44 import template44
+
 
 USE_CREDENTIALS = settings.USE_CREDENTIALS
 router = APIRouter()
@@ -101,12 +101,14 @@ async def background_send_37(user_hash_list, background_tasks) -> JSONResponse:
         background_tasks.add_task(fm.send_message, message)
 
 # SEND END-YEAR REVIEW DETAILS TO APPROVED
+
+
 async def background_send_19(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
             subject="Form Approved",
             recipients=[item[0]],
-            body=template44.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+            body=template37.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
                                    middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
             subtype="html"
         )
@@ -505,6 +507,8 @@ async def approve_performance_details(appraisal_form_id):
     return await background_send_98(res)
 
 # @router.post("/endyearreviewapproved/")
+
+
 async def end_of_year_approved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
@@ -512,6 +516,8 @@ async def end_of_year_approved(appraisal_form_id):
     return await background_send_19(res)
 
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
+
+
 async def competency_details_approved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
         'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
