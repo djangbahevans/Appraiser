@@ -1,20 +1,16 @@
 1. clone application
 
-2. create virtual enviroment -> virtualenv [env_name]
+2. Specify the local port for fastapi to run on in the Dockerfile and docker-compose.yml files
 
-3. install requirements -> pip3 install -r requirements.txt
+3. Cd into the project directory in terminal
 
-4. setup database connection in database.py -> default create sqlite db(sql_app.db)
+4. Build the cocker container with "docker-compose build" (sudo docker-compose build)
 
-5. setup mailtrap connection in main.py -> change the email details to your account
+5. Run the container with "docker-compose up" (sudo docker-compose up) \*\*To run in detach mode use "docker-compose up -d"
 
-6. run application with uvicorn main:api --reload [debug mode] OR run with docker using docker-compose up --build
+6. Access swagger UI at localhost/api/docs or on allocated port
 
-7. access swagger UI at localhost/api/docs or on allocated port
+7. Database is mounted in a separate docker container but PGadmin can be accessed at "http://196.43.196.108:8988/browser/"
 
-8. \__(*_*)__/
-      /   \
-      S E L
-  
-      
-    
+\__(\*_\*)\_\_/
+/ \
