@@ -125,3 +125,38 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
         return JSONResponse(status_code=200, content={"message": "performance details has been created"})
     else:
         return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
+
+
+async def performance_assessment_score(appraisal_form_id, db: Session):
+    pascore = db.execute("""SELECT avg(score) as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    pascore = pascore.fetchall()
+    return pascore
+
+
+async def core_performance_assessment_score(appraisal_form_id, db: Session):
+    cpascore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='Core';""", {
+        'appraisal_form_id': appraisal_form_id})
+    cpascore = cpascore.fetchall()
+    return cpascore
+
+
+async def non_core_performance_assessment_score(appraisal_form_id, db: Session):
+    ncpascore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='None Core';""", {
+        'appraisal_form_id': appraisal_form_id})
+    ncpascore = ncpascore.fetchall()
+    return ncpascore
+
+
+async def overall_total_score(appraisal_form_id, db: Session):
+    otscore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    otscore = otscore.fetchall()
+    return otscore
+
+
+async def overall_performance_rating(appraisal_form_id, db: Session):
+    oprating = db.execute("""SELECT (avg(score)*0.6)*100 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    oprating = oprating.fetchall()
+    return oprating
