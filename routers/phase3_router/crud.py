@@ -60,7 +60,7 @@ async def create_annual_appraisal(payload: schemas.AnnualAppraisal, db: Session)
     if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
         res = db.execute("""INSERT INTO public.annual_appraisal(
 	                    result_areas, target, resources, appraisal_form_id, submit)
-	                    values(:result_areas, :target, :resources, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do 
+	                    values(:result_areas, :target, :resources, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set result_areas = EXCLUDED.result_areas, target = EXCLUDED.target, resources = EXCLUDED.resources, submit = EXCLUDED.submit; """,
                          {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
@@ -87,7 +87,7 @@ async def competence_details(payload: List[schemas.CompDetails],  db: Session):
                             FOR i in 1..32 LOOP
                             INSERT INTO public.competency_details(competency_id, appraisal_form_id, grade, submit)
                             values(:competency_id, :appraisal_form_id, :grade, :submit)
-                            on conflict (competency_id, appraisal_form_id) do 
+                            on conflict (competency_id, appraisal_form_id) do
                             update set grade = EXCLUDED.grade, submit = EXCLUDED.submit;
                             END LOOP;
                             END;
@@ -111,7 +111,7 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
     query = query.first()[0]
     if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
         res = db.execute("""INSERT INTO public.performance_details(appraisal_form_id, weight, comments, final_score, approved_date, submit)
-	                            values(:appraisal_form_id, :weight, :comments, :final_score, :approved_date, :submit) on conflict (appraisal_form_id) do 
+	                            values(:appraisal_form_id, :weight, :comments, :final_score, :approved_date, :submit) on conflict (appraisal_form_id) do
 	                                update set weight = EXCLUDED.weight, comments = EXCLUDED.comments, final_score = EXCLUDED.final_score, approved_date = EXCLUDED.approved_date, submit = EXCLUDED.submit; """,
                          {'appraisal_form_id': appraisal_form_id, 'weight': weight, 'comments': comments, 'final_score': final_score, 'approved_date': approved_date, 'submit': submit})  # CREATE INTO TABLE
         db.commit()
@@ -130,33 +130,60 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
 async def performance_assessment_score(appraisal_form_id, db: Session):
     pascore = db.execute("""SELECT avg(score) as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
         'appraisal_form_id': appraisal_form_id})
-    pascore = pascore.fetchall()
+    pascore = pascore.first()[0]
     return pascore
 
 
 async def core_performance_assessment_score(appraisal_form_id, db: Session):
     cpascore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='Core';""", {
         'appraisal_form_id': appraisal_form_id})
-    cpascore = cpascore.fetchall()
+    cpascore = cpascore.first()[0]
     return cpascore
 
 
 async def non_core_performance_assessment_score(appraisal_form_id, db: Session):
     ncpascore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='None Core';""", {
         'appraisal_form_id': appraisal_form_id})
-    ncpascore = ncpascore.fetchall()
+    ncpascore = ncpascore.first()[0]
     return ncpascore
 
 
 async def overall_total_score(appraisal_form_id, db: Session):
     otscore = db.execute("""SELECT avg(score)*0.6 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
         'appraisal_form_id': appraisal_form_id})
-    otscore = otscore.fetchall()
+    otscore = otscore.first()[0]
     return otscore
 
 
 async def overall_performance_rating(appraisal_form_id, db: Session):
     oprating = db.execute("""SELECT (avg(score)*0.6)*100 as value FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
         'appraisal_form_id': appraisal_form_id})
-    oprating = oprating.fetchall()
+    oprating = oprating.first()[0]
     return oprating
+
+
+async def overall_performance(appraisal_form_id, db: Session):
+    pascore = db.execute("""SELECT avg(score) as pa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    pascore = pascore.first()[0]
+    # return pascore
+
+    cpascore = db.execute("""SELECT avg(score)*0.6 as cpa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='Core';""", {
+        'appraisal_form_id': appraisal_form_id})
+    cpascore = cpascore.first()[0]
+# return cpascore
+
+    ncpascore = db.execute("""SELECT avg(score)*0.6 as ncpa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='None Core';""", {
+        'appraisal_form_id': appraisal_form_id})
+    ncpascore = ncpascore.first()[0]
+# return ncpascore
+
+    otscore = db.execute("""SELECT avg(score)*0.6 as ot_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    otscore = otscore.first()[0]
+# return otscore
+
+    oprating = db.execute("""SELECT (avg(score)*0.6)*100 as op_rating FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    oprating = oprating.first()[0]
+    return oprating, pascore, cpascore, ncpascore, otscore
