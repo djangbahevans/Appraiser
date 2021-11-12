@@ -163,27 +163,7 @@ async def overall_performance_rating(appraisal_form_id, db: Session):
 
 
 async def overall_performance(appraisal_form_id, db: Session):
-    pascore = db.execute("""SELECT avg(score) as pa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+    overall_performance = db.execute("""SELECT avg(score) as pa_score,avg(score)*0.6 as cpa_score,avg(score)*0.6 as ncpa_score,avg(score)*0.6 as ot_score,(avg(score)*0.6)*100 as op_rating  FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
         'appraisal_form_id': appraisal_form_id})
-    pascore = pascore.fetchall()
-    # return pascore
-
-    cpascore = db.execute("""SELECT avg(score)*0.6 as cpa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='Core';""", {
-        'appraisal_form_id': appraisal_form_id})
-    cpascore = cpascore.fetchall()
-# return cpascore
-
-    ncpascore = db.execute("""SELECT avg(score)*0.6 as ncpa_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id and category='None Core';""", {
-        'appraisal_form_id': appraisal_form_id})
-    ncpascore = ncpascore.fetchall()
-# return ncpascore
-
-    otscore = db.execute("""SELECT avg(score)*0.6 as ot_score FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
-        'appraisal_form_id': appraisal_form_id})
-    otscore = otscore.fetchall()
-# return otscore
-
-    oprating = db.execute("""SELECT (avg(score)*0.6)*100 as op_rating FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
-        'appraisal_form_id': appraisal_form_id})
-    oprating = oprating.fetchall()
-    return oprating, pascore, cpascore, ncpascore, otscore
+    overall_performance = overall_performance.fetchall()
+    return overall_performance
