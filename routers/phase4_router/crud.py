@@ -29,7 +29,7 @@ async def aprpaisers_comment_on_work_plan(payload: schemas.AprpaisersComment0nWo
 	                    appraisers_comment_on_workplan, appraisal_form_id, submit)
 	                    values(:appraisers_comment_on_workplan, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set appraisers_comment_on_workplan = EXCLUDED.appraisers_comment_on_workplan,  submit = EXCLUDED.submit; """,
-                         {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+                         {'appraisers_comment_on_workplan': payload.appraisers_comment_on_workplan, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
@@ -51,7 +51,7 @@ async def training_development_comments(payload: schemas.TrainingDevelopmentComm
 	                    training_development_comments, appraisal_form_id, submit)
 	                    values(:training_development_comments, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set training_development_comments = EXCLUDED.training_development_comments,  submit = EXCLUDED.submit; """,
-                         {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+                         {'training_development_comments': payload.training_development_comments, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
@@ -73,7 +73,7 @@ async def appraisees_comments_and_plan(payload: schemas.AppraiseesCommentsAndPla
 	                    appraisees_comments_and_plan, appraisal_form_id, submit)
 	                    values(:appraisees_comments_and_plan, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set appraisees_comments_and_plan = EXCLUDED.appraisees_comments_and_plan,  submit = EXCLUDED.submit; """,
-                         {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+                         {'appraisees_comments_and_plan': payload.appraisees_comments_and_plan, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
@@ -95,7 +95,7 @@ async def head_of_divisions_comments(payload: schemas.HeadOfDivisionsComments, d
 	                    head_of_divisions_comments, appraisal_form_id, submit)
 	                    values(:head_of_divisions_comments, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set head_of_divisions_comments = EXCLUDED.head_of_divisions_comments,  submit = EXCLUDED.submit; """,
-                         {'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+                         {'head_of_divisions_comments': payload.head_of_divisions_comments, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
