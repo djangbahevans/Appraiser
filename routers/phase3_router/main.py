@@ -48,9 +48,8 @@ async def overall_performance_rating(appraisal_form_id: int, db: Session = Depen
 async def overall_performance(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.overall_performance(appraisal_form_id, db)
 
+
 # @router.get("/annualappraisal/")
-
-
 async def read_annual_appraisal(db: Session = Depends(get_db)):
     return await crud.read_annual_appraisal(db)
 

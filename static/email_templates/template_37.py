@@ -42,8 +42,6 @@ template37 = """
 
                         <p></p>
                         
-
-
                         You have now completed this year's
                         <strong>Performance Assessment. </strong> <br/>
 

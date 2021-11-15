@@ -1,5 +1,5 @@
 
-template22 = """
+template44 = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
@@ -38,19 +38,12 @@ template22 = """
        
                 <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
-                        <p>Your mid-year review forms have been inspected and
+                        <p>Your end of year review forms have been inspected and
                         disapproved by your supervisor.</p>
 
-                        <p>Please refill the form withrespect to your supervisor's comment below.</p>
+                        <p>Please refill the form.</p>
 
-                        <strong><p>View your form details and comments from your supervisor.</strong></br>
-                                    progress review - {progress_review}</br>
-                                    competency - {competency}</br>
-                                    appraisal form id - {appraisal_form_id}</br>
-                                    supervisor's commens - {midyear_review_comment} </p></br>
-
-
-                        The forms will be avilable untill the deadline for phase-2 is reached
+                        The forms will be avilable untill the deadline is reached
                         <strong></strong> <br/>
 
                         Thank You. <br/>

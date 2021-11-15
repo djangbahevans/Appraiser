@@ -36,7 +36,7 @@ template23 = """
 
                 <img alt="aiti.png" src="https://www.aiti-kace.com.gh/sites/default/files/aiti.png" style="width:199px;height:69px;">
        
-                <h3> <p>Dear Sir/Madam,</p> </h3>
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
                         <p>Your Mid-Year Review forms have been inspected and approved by your supervisor.</p>
 
