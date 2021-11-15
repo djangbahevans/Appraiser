@@ -315,3 +315,27 @@ class get_Phase1(BaseModel):
 
 class approve_phase1(BaseModel):
     status: bool
+
+
+class AprpaisersComment0nWorkPlan(BaseModel):
+    appraisal_form_id: int
+    appraisers_comment_on_workplan: str
+    submit: int
+
+
+class TrainingDevelopmentComments(BaseModel):
+    appraisal_form_id: int
+    training_development_comments: str
+    submit: int
+
+
+class AppraiseesCommentsAndPlans(BaseModel):
+    appraisal_form_id: int
+    appraisees_comments_and_plan: str
+    submit: int
+
+
+class HeadOfDivisionsComments(BaseModel):
+    appraisal_form_id: int
+    head_of_divisions_comments: str
+    submit: int
