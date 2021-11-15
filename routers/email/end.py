@@ -72,9 +72,8 @@ async def background_send_2(user_hash_list, background_tasks) -> JSONResponse:
         )
         background_tasks.add_task(fm.send_message, message)
 
+
 # APPROVE END-YEAR REVIEW
-
-
 async def background_send_39(user_hash_list, background_tasks) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -86,9 +85,8 @@ async def background_send_39(user_hash_list, background_tasks) -> JSONResponse:
         )
         background_tasks.add_task(fm.send_message, message)
 
+
 # START END-YEAR REVIEW(INDIVIDUAL)
-
-
 async def background_send_37(user_hash_list, background_tasks) -> JSONResponse:
     for item in user_hash_list:  # CREATE VARIABLES FOR EMAIL TEMPLATES
         message = MessageSchema(
@@ -100,9 +98,8 @@ async def background_send_37(user_hash_list, background_tasks) -> JSONResponse:
         )
         background_tasks.add_task(fm.send_message, message)
 
+
 # SEND END-YEAR REVIEW DETAILS TO APPROVED
-
-
 async def background_send_19(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -126,9 +123,8 @@ async def background_send_41(user_hash_list, background_tasks) -> JSONResponse:
         )
         background_tasks.add_task(fm.send_message, message)
 
+
 # REMIND STAFF TO FILL END-YEAR REVIEW (NO LINK)
-
-
 async def background_send_46(user_hash_list, background_tasks) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -142,9 +138,8 @@ async def background_send_46(user_hash_list, background_tasks) -> JSONResponse:
 
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 # BACKGROUND TASKS(WITH SCHEDULER)
-
-
 async def background_send_20(user_hash_list) -> JSONResponse:
     for item in user_hash_list:  # CREATE VARIABLES FOR EMAIL TEMPLATES
         message = MessageSchema(
@@ -155,9 +150,8 @@ async def background_send_20(user_hash_list) -> JSONResponse:
         )
         await fm.send_message(message)
 
+
 # LAST DAYS FOR END-YEAR REVIEW
-
-
 async def background_send_21(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -285,9 +279,8 @@ async def background_send_31(user_hash_list) -> JSONResponse:
         )
         background_tasks.add_task(fm.send_message, message)
 
+
 # END-YEAR REVIEW APPROVED
-
-
 async def background_send_32(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -326,8 +319,6 @@ async def background_send_33(user_hash_list) -> JSONResponse:
 
 
 # APPROVE END-YEAR REVIEW
-
-
 async def background_send_36(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
@@ -366,18 +357,16 @@ async def background_send_98(user_hash_list) -> JSONResponse:
 
 # EMAIL ENDPOINTS FOR MANUALLY SENT EMAILS
 
+
 # SEND END-YEAR LINK TO ALL STAFF
-
-
 @ router.post("/endyearreviewemail/")
 async def start_endyear_review_(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute("""SELECT * FROM public.hash_table""")
     res = res.fetchall()
     return await background_send_2(res, background_tasks)
 
+
 # SEND END-YEAR LINK TO INDIVIDUAL STAFF
-
-
 @ router.post("/endyearreviewemailstaff/")
 async def end_year_review_staff(email: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute("""SELECT email, hash FROM public.hash_table where email=:email""", {
@@ -385,9 +374,8 @@ async def end_year_review_staff(email: str, background_tasks: BackgroundTasks, d
     res = res.fetchall()
     return await background_send_37(res, background_tasks)
 
+
 # SEND REMINDER TO SUPERVISORS TO APPROVE SUBMITTED END-YEAR REVIEW FORMS
-
-
 @ router.post("/approveendyearreview/")
 async def approve_completed_end_year_review(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     res = db.execute(
@@ -395,9 +383,8 @@ async def approve_completed_end_year_review(background_tasks: BackgroundTasks, d
     res = res.first()[0]
     return await background_send_39(res, background_tasks)
 
+
 # SEND END-YEAR DETAILS TO APPROVED
-
-
 @ router.post("/endformdetails/")
 # SEND FORM DETAILS TO APPROVED STAFF
 async def send_endyear_review_details_to_approved(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
@@ -406,9 +393,8 @@ async def send_endyear_review_details_to_approved(background_tasks: BackgroundTa
     res = res.first()[0]
     return await background_send_41(res, background_tasks)
 
+
 # REMIND APPRAISEE TO CHECK EMAIL WITH LINK FOR END-YEAR REVIEW
-
-
 @ router.post("/endyearreviewreminder/{supervisor}/")
 async def start_endyear_review_reminder(background_tasks: BackgroundTasks, supervisor: int, db: Session = Depends(get_db)):
     res = db.execute("""select email, progress_review, remarks, competency from public.view_users_form_details where supervisor=:supervisor and end_status=0 and progress_review is null and remarks is null and competency is null""", {
@@ -432,54 +418,48 @@ async def three_days_to_end_reminder():
     res = res.fetchall()
     return await background_send_20(res)
 
+
 # @router.post("/startday/")
-
-
 async def start_end_year_review():
     res = db.execute(
         """SELECT * FROM public.hash_table""")  # SELECT EMAIL FROM HASH TABLE
     res = res.fetchall()
     return await background_send_26(res)
 
+
 # @router.post("/lastfivedaysreminder/")
-
-
 async def last_five_days_to_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_incompleted_form('End', 1)""")
     res = res.first()[0]
     return await background_send_21(res)
 
+
 # @router.post("/lastfourdaysreminder/")
-
-
 async def last_four_days_to_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_incompleted_form('End', 1)""")
     res = res.first()[0]
     return await background_send_22(res)
 
+
 # @router.post("/lastthreedaysreminder/")
-
-
 async def last_three_days_to_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_incompleted_form('End', 1)""")
     res = res.first()[0]
     return await background_send_23(res)
 
+
 # @router.post("/lasttwodaysreminder/")
-
-
 async def last_two_days_to_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_incompleted_form('End', 1)""")
     res = res.first()[0]
     return await background_send_24(res)
 
+
 # @router.post("/lastdayreminder/")
-
-
 async def last_day_to_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_incompleted_form('End', 1)""")
@@ -537,17 +517,14 @@ async def end_of_year_disapproved(appraisal_form_id):
 
 
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
-
-
 async def competency_details_approved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
         'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_32(res)
 
+
 # @router.post("/endyearreviewdisapproved/")
-
-
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
 async def competency_details_disapproved(appraisal_form_id):
     res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
@@ -558,45 +535,40 @@ async def competency_details_disapproved(appraisal_form_id):
     com = com.fetchall()
     return await background_send_38(res)
 
+
 # @router.post("/lastfivedaystoapprovereminder/")
-
-
 async def last_five_days_to_approve_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")
     res = res.first()[0]
     return await background_send_27(res)
 
+
 # @router.post("/lastfourdaystoapprovereminder/")
-
-
 async def last_four_days_to_approve_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")
     res = res.first()[0]
     return await background_send_28(res)
 
+
 # @router.post("/lastthreedaystoapprovereminder/")
-
-
 async def last_three_days_to_approve_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")
     res = res.first()[0]
     return await background_send_29(res)
 
+
 # @router.post("/lasttwodaystoapprovereminder/")
-
-
 async def last_two_days_to_approve_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")
     res = res.first()[0]
     return await background_send_30(res)
 
+
 # @router.post("/lastdaytoapprovereminder/")
-
-
 async def last_day_to_approve_end_reminder():
     res = db.execute(
         """SELECT public.get_list_of_waiting_approval('End', 1)""")
@@ -621,8 +593,8 @@ end_deadline = db.execute(
     """ SELECT * FROM deadline WHERE deadline_type = 'End' """)
 end_deadline = end_deadline.fetchall()
 
-# DATES
 
+# DATES
 end_start_date = end_deadline[0][1]
 end_end_date = end_deadline[0][2]
 end_send_date = end_start_date-timedelta(3)
