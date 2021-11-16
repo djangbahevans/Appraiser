@@ -40,8 +40,13 @@ template37 = """
 
                         <p>Your End of Year Details have been inspected and approved by your supervisor.</p>
 
-                        <p></p>
-                        
+                        <p>View your final scores and follow the link to give your assessment</p>
+                        <p>Core Competencies Assessment Score - {core_assessments}</p>
+                        <p>Non-Core Competencies Assessment Score - {non_core_assessments}</p>
+                        <p>Total Score - {total_score}</p>
+                        <p>Overall Rating - {overall_rating}</p>
+                         <strong><p>Please follow the link to give your assessment .</strong></br>
+                    <a href=http://196.43.196.108:5445/forms/comment target="_blank">click this link to log in</a> </p>
                         You have now completed this year's
                         <strong>Performance Assessment. </strong> <br/>
 
