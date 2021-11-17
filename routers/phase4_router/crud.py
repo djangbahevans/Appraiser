@@ -127,10 +127,10 @@ async def appraisees_comments_and_plan(payload: schemas.AppraiseesCommentsAndPla
     query = query.first()[0]
     if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING COMMENT
         res = db.execute("""INSERT INTO public.endofyear_review(
-	                    appraisees_comments_and_plan, appraisal_form_id, submit)
-	                    values(:appraisees_comments_and_plan, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
+	                    appraisees_comments_and_plan, training_development_comments, appraisal_form_id, submit)
+	                    values(:appraisees_comments_and_plan, :training_development_comments, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                    update set appraisees_comments_and_plan = EXCLUDED.appraisees_comments_and_plan,  submit = EXCLUDED.submit; """,
-                         {'appraisees_comments_and_plan': payload.appraisees_comments_and_plan, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
+                         {'appraisees_comments_and_plan': payload.appraisees_comments_and_plan, 'training_development_comments': payload.training_development_comments, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
             # SEND COMMENT ON WORK PLAN TO SUPERVISOR'S EMAIL TO REVIEW AND ALSO ADD COMMENTS

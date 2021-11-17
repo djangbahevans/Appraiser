@@ -332,6 +332,7 @@ class TrainingDevelopmentComments(BaseModel):
 class AppraiseesCommentsAndPlans(BaseModel):
     appraisal_form_id: int
     appraisees_comments_and_plan: str
+    training_development_comments: str
     submit: int
 
 
