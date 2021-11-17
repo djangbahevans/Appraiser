@@ -1,4 +1,4 @@
-from ..auth_router.crud import UnAuthorised, is_token_blacklisted, utils, HTTPException, jwt
+from ..auth_router.crud import UnAuthorised, is_token_blacklisted, utils, HTTPException, jwt, sys
 from fastapi import Depends, HTTPException, Response, status, Body, Header
 from fastapi import Depends, HTTPException, BackgroundTasks
 from starlette.responses import JSONResponse
@@ -9,6 +9,63 @@ from .. import email
 from typing import List
 
 # READ END OF YEAR REVIEW
+
+
+async def read_appraisees_commented_list(user_id: int, db: Session):
+    res = db.execute(
+        """SELECT public.get_list_of_appraisee_commented(:user_id)""", {
+            'user_id': user_id})  # GET FROM DB FUNCTION
+    res = res.fetchall()
+    return res
+
+
+async def read_appraisees_commented_list_auth(user_id: int, token: str, db: Session):
+    try:
+        if await is_token_blacklisted(token, db):
+            raise UnAuthorised('token blacklisted')
+        token_data = utils.decode_token(data=token)
+        if token_data:
+            return await read_appraisees_commented_list(user_id, db)
+        else:
+            raise HTTPException(status_code=401, detail="{}".format(
+                sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except UnAuthorised:
+        raise HTTPException(status_code=401, detail="{}".format(
+            sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="access token expired", headers={
+                            "WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=500, detail="decode error not enough arguments", headers={
+                            "WWW-Authenticate": "Bearer"})
+
+
+async def read_appraisees_not_commented_list(user_id: int, db: Session):
+    res = db.execute("""SELECT public.get_list_of_appraisees_not_commented(:user_id)""", {
+        'user_id': user_id})  # GET FROM DB FUNCTION
+    res = res.fetchall()
+    return res
+
+
+async def read_appraisees_not_commented_list_auth(user_id: int, token: str, db: Session):
+    try:
+        if await is_token_blacklisted(token, db):
+            raise UnAuthorised('token blacklisted')
+        token_data = utils.decode_token(data=token)
+        if token_data:
+            return await read_appraisees_not_commented_list(user_id, db)
+        else:
+            raise HTTPException(status_code=401, detail="{}".format(
+                sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except UnAuthorised:
+        raise HTTPException(status_code=401, detail="{}".format(
+            sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="access token expired", headers={
+                            "WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=500, detail="decode error not enough arguments", headers={
+                            "WWW-Authenticate": "Bearer"})
 
 
 async def read_endofyear_review(appraisal_form_id, db: Session):
@@ -32,7 +89,7 @@ async def aprpaisers_comment_on_work_plan(payload: schemas.AprpaisersComment0nWo
                          {'appraisers_comment_on_workplan': payload.appraisers_comment_on_workplan, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
-            # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
+            # SEND COMMENT ON WORK PLAN TO HEAD OF DIVISION'S EMAIL TO REVIEW AND ALSO ADD COMMENTS
             # await email.start.approve_annual_plan(payload.appraisal_form_id)
             # else:
             pass
@@ -76,8 +133,8 @@ async def appraisees_comments_and_plan(payload: schemas.AppraiseesCommentsAndPla
                          {'appraisees_comments_and_plan': payload.appraisees_comments_and_plan, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
-            # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-            # await email.start.approve_annual_plan(payload.appraisal_form_id)
+            # SEND COMMENT ON WORK PLAN TO SUPERVISOR'S EMAIL TO REVIEW AND ALSO ADD COMMENTS
+            await email.end.add_comment_on_workplan(payload.appraisal_form_id)
             # else:
             pass
 

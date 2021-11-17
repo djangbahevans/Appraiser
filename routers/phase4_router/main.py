@@ -3,10 +3,20 @@ from pydantic import UUID4, EmailStr
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from . import crud, schemas
-from main import get_db
+from main import get_db, oauth2_scheme
 from datetime import datetime
 
 router = APIRouter()
+
+
+@router.get("/appraiseescommentlist/")
+async def read_appraisees_commented_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.read_appraisees_commented_list_auth(user_id, token, db)
+
+
+@router.get("/appraiseesnotcommentlist/")
+async def read_appraisees_not_commented_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.read_appraisees_not_commented_list_auth(user_id, token, db)
 
 
 @router.get("/performanceassessmentscore")
