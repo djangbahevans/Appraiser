@@ -502,7 +502,7 @@ async def approve_end_year_review(appraisal_form_id):
 
 async def add_comment_on_workplan(appraisal_form_id):
     res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, appraisal_comment_on_workplan from public.view_users_form_details
-                        where appraisal_form_id=:appraisal_form_id and comments is  not null and weight is not  null and final_score is not  null and submit=1  """,
+                        where appraisal_form_id=:appraisal_form_id """,
                      {
                          'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
