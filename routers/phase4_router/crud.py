@@ -129,7 +129,7 @@ async def appraisees_comments_and_plan(payload: schemas.AppraiseesCommentsAndPla
         res = db.execute("""INSERT INTO public.endofyear_review(
 	                    appraisees_comments_and_plan, training_development_comments, appraisal_form_id, submit)
 	                    values(:appraisees_comments_and_plan, :training_development_comments, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
-	                    update set appraisees_comments_and_plan = EXCLUDED.appraisees_comments_and_plan,  submit = EXCLUDED.submit; """,
+	                    update set appraisees_comments_and_plan = EXCLUDED.appraisees_comments_and_plan, training_development_comments=EXCLUDED.training_development_comments,  submit = EXCLUDED.submit; """,
                          {'appraisees_comments_and_plan': payload.appraisees_comments_and_plan, 'training_development_comments': payload.training_development_comments, 'appraisal_form_id': payload.appraisal_form_id, 'submit': payload.submit})  # CREATE INTO TABLE
         db.commit()
         if payload.submit == 1:
