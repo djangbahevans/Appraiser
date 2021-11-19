@@ -19,6 +19,16 @@ async def read_appraisees_not_commented_list(user_id: int, token: str = Depends(
     return await crud.read_appraisees_not_commented_list_auth(user_id, token, db)
 
 
+@router.get("/appraiserscommentlist/")
+async def read_appraisers_commented_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.read_appraisers_commented_list_auth(user_id, token, db)
+
+
+@router.get("/appraisersnotcommentlist/")
+async def read_appraisers_not_commented_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.read_appraisers_not_commented_list_auth(user_id, token, db)
+
+
 @router.get("/performanceassessmentscore")
 async def read_performance_assessment_score(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.performance_assessment_score(appraisal_form_id, db)
