@@ -147,7 +147,7 @@ async def aprpaisers_comment_on_work_plan(payload: schemas.AprpaisersComment0nWo
         db.commit()
         if payload.submit == 1:
             # SEND COMMENT ON WORK PLAN TO HEAD OF DIVISION'S EMAIL TO REVIEW AND ALSO ADD COMMENTS
-            # await email.start.approve_annual_plan(payload.appraisal_form_id)
+            await email.end.add_head_of_division_comments(payload.appraisal_form_id)
             # else:
             pass
 
@@ -195,7 +195,7 @@ async def appraisees_comments_and_plan(payload: schemas.AppraiseesCommentsAndPla
             # else:
             pass
 
-        return JSONResponse(status_code=200, content={"message": "appraisers comment on workplan has been created"})
+        return JSONResponse(status_code=200, content={"message": "appraisees comment on workplan created"})
     else:
         return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
 
@@ -217,7 +217,7 @@ async def head_of_divisions_comments(payload: schemas.HeadOfDivisionsComments, d
             # else:
             pass
 
-        return JSONResponse(status_code=200, content={"message": "appraisers comment on workplan has been created"})
+        return JSONResponse(status_code=200, content={"message": "head of division's comments created"})
     else:
         return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
 

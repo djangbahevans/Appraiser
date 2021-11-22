@@ -1,5 +1,5 @@
 
-template45 = """
+template46 = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
@@ -36,9 +36,9 @@ template45 = """
 
                 <img alt="aiti.png" src="https://www.aiti-kace.com.gh/sites/default/files/aiti.png" style="width:199px;height:69px;">
        
-                <h3> <p>Dear Supervisor,</p> </h3>
+                <h3> <p>Dear Head of Division,</p> </h3>
 
-                        <p>Your appraisee  {firstname} {middlename} {lastname} has sent comments on workplan. Please review and add your comments by following the link..</p>
+                        <p>Your staff  {firstname} {middlename} {lastname} has sent comments on workplan which have been reviewd by a supervisor. Please review and add your comments by following the link..</p>
 
                         <p>Below are the scores and comment from your appraisee</p>
                         <p>Core Competencies Assessment Score - {core_assessments}</p>
@@ -46,6 +46,8 @@ template45 = """
                         <p>Total Score - {total_score}</p>
                         <p>Overall Rating - {overall_rating}</p>
                         <p>Appraisee comments - {appraisees_comments_and_plan}</p>
+                        <p>Supervisor's comments - {appraisal_comment_on_workplan}</p>
+
                          <strong><p>Please follow the link to give your assessment .</strong></br>
                          
                     <a href=http://196.43.196.108:5445/forms/comment target="_blank">click this link to enter assessment</a> </p>

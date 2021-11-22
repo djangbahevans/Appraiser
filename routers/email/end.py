@@ -28,6 +28,8 @@ from static.email_templates.template_42 import template42
 from static.email_templates.template_43 import template43
 from static.email_templates.template_44 import template44
 from static.email_templates.template_45 import template45
+from static.email_templates.template_46 import template46
+
 
 USE_CREDENTIALS = settings.USE_CREDENTIALS
 router = APIRouter()
@@ -116,10 +118,22 @@ async def background_send_19(user_hash_list) -> JSONResponse:
 async def background_send_63(user_hash_list) -> JSONResponse:
     for item in user_hash_list:
         message = MessageSchema(
-            subject="Form Approved",
-            recipients=[item[0]],
+            subject="View Comments On Work-Plan",
+            recipients=[item[6]],
             body=template45.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], appraisal_comment_on_workplan=item[11]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], appraisees_comments_and_plan=item[11]),
+            subtype="html"
+        )
+        await fm.send_message(message)
+
+
+async def background_send_64(user_hash_list) -> JSONResponse:
+    for item in user_hash_list:
+        message = MessageSchema(
+            subject="View Appraiser's Comments On Work-Plan",
+            recipients=[item[6]],
+            body=template46.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], appraisees_comments_and_plan=item[11], appraisal_comment_on_workplan=item[12]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -501,12 +515,21 @@ async def approve_end_year_review(appraisal_form_id):
 
 
 async def add_comment_on_workplan(appraisal_form_id):
-    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, appraisal_comment_on_workplan from public.view_users_form_details
+    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, appraisees_comments_and_plan from public.view_users_form_details
                         where appraisal_form_id=:appraisal_form_id """,
                      {
                          'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
     return await background_send_63(res)
+
+
+async def add_head_of_division_comments(appraisal_form_id):
+    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, appraisees_comments_and_plan,appraisal_comment_on_workplan from public.view_users_form_details
+                        where appraisal_form_id=:appraisal_form_id """,
+                     {
+                         'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
+    res = res.fetchall()
+    return await background_send_64(res)
 
 
 async def approve_competence_details(appraisal_form_id):
