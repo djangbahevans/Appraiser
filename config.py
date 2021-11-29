@@ -6,8 +6,8 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     SECRET_KEY: str = os.environ.get(
         'SECRET_KEY') or "fsdfsdfsdfsdflhiugysadf87w940e-=r0werpolwe$16$5*dfsdfsdf&&#$rrr$$)7a9563OO93f7099f6f0f4caa6cf63b88e8d3e7"
     ALGORITHM: str = os.environ.get('ALGORITHM') or "HS256"
-    MAIL_USERNAME: str = os.environ.get('MAIL_USERNAME') or "847757583aba64"
-    MAIL_PASSWORD: str = os.environ.get('MAIL_PASSWORD') or "dbac104863818f"
+    MAIL_USERNAME: str = os.environ.get('MAIL_USERNAME') or "9bf9dd29ed49a9"
+    MAIL_PASSWORD: str = os.environ.get('MAIL_PASSWORD') or "eb28ce2abf91e5"
     MAIL_FROM: str = os.environ.get(
         'MAIL_FROM') or "appraisalmanagement2021@gmail.com"
     MAIL_PORT: int = os.environ.get('MAIL_PORT') or 587
@@ -30,7 +30,7 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     MID_URL: str = os.environ.get(
         'MID_URL') or 'http://196.43.196.108:5445/forms/mid-year'
     END_URL: str = os.environ.get(
-        'END_URL') or 'http://localhost:4200/forms/end-year'
+        'END_URL') or 'http://196.43.196.108:5445/forms/end-year'
     PASSWORD_URL: str = os.environ.get(
         'PASSWORD_URL') or 'http://196.43.196.108:5445/forms/start'
 

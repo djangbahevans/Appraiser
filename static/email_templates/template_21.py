@@ -49,7 +49,7 @@ template21 = """
 
                     <strong><p>Kindly review the form details.</strong></br>
                                
-                                    progress_review - {progress_review}</br>
+                                    progress review - {progress_review}</br>
                                     competency - {competency}</br>
                                     appraisal form id - {appraisal_form_id} </p></br>
 

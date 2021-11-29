@@ -109,7 +109,7 @@ async def background_send_19(user_hash_list) -> JSONResponse:
             subject="Form Approved",
             recipients=[item[0]],
             body=template37.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], hash=item[11]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -121,7 +121,7 @@ async def background_send_63(user_hash_list) -> JSONResponse:
             subject="View Comments On Work-Plan",
             recipients=[item[6]],
             body=template45.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], appraisees_comments_and_plan=item[11]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], total_score=item[9], overall_rating=item[10], appraisees_comments_and_plan=item[11], hash=item[12]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -515,8 +515,10 @@ async def approve_end_year_review(appraisal_form_id):
 
 
 async def add_comment_on_workplan(appraisal_form_id):
-    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, appraisees_comments_and_plan from public.view_users_form_details
-                        where appraisal_form_id=:appraisal_form_id """,
+    res = db.execute("""select  view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email,round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, view_users_form_details.appraisees_comments_and_plan, public.hash_table.hash
+from public.view_users_form_details
+inner join public.hash_table
+on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id """,
                      {
                          'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
@@ -548,7 +550,9 @@ async def approve_performance_details(appraisal_form_id):
 
 # @router.post("/endyearreviewapproved/")
 async def end_of_year_approved(appraisal_form_id):
-    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email, round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating FROM view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+    res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email,  round((core_assessments*0.6)::decimal,1) as core_assessments, round((non_core_assessments*0.6)::decimal,1) as non_core_assessments, round((((core_assessments+non_core_assessments)*0.6)*0.6)::decimal,1) as total_score, ((((core_assessments+non_core_assessments)*0.6)*0.6))*100 as overall_rating, public.hash_table.hash FROM view_users_form_details 
+inner join public.hash_table
+on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_19(res)
