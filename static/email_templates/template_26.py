@@ -47,8 +47,7 @@ template26 = """
                         
                                     target - {target}</br>
                                     resources - {resources}</br>
-                                    result areas - {result_areas}</br>
-                                    appraisal form id - {appraisal_form_id} </p></br>
+                                    result areas - {result_areas} </p></br>
 
                         The forms will be avilable untill the start of the
                         <strong>Mid-Year Review process  </strong> <br/>

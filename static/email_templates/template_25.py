@@ -48,8 +48,7 @@ template25 = """
                         
                                     progress review - {progress_review}</br>
                                     remarks - {remarks}</br>
-                                    competency - {competency}</br>
-                                    appraisal form id - {appraisal_form_id} </p></br>
+                                    competency - {competency}</p></br>
 
                         The forms will be avilable untill the start of the
                         <strong>Mid-Year Review process  </strong> <br/>

@@ -46,7 +46,6 @@ template22 = """
                         <strong><p>View your form details and comments from your supervisor.</strong></br>
                                     progress review - {progress_review}</br>
                                     competency - {competency}</br>
-                                    appraisal form id - {appraisal_form_id}</br>
                                     supervisor's commens - {midyear_review_comment} </p></br>
 
 

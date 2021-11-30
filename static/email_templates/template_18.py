@@ -47,8 +47,7 @@ template18 = """
                         <strong><p>View your form details to keep track of your progress.</strong></br>
                                     target - {target}</br>
                                     resources - {resources}</br>
-                                    result areas - {result_areas}</br>
-                                    appraisal form id - {appraisal_form_id} </p></br>
+                                    result areas - {result_areas}</p></br>
 
 
                         The forms will be avilable untill the start of the

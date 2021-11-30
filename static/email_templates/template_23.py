@@ -46,8 +46,7 @@ template23 = """
                         
                                     progress review - {progress_review}</br>
                                     remarks - {remarks}</br>
-                                    competency - {competency}</br>
-                                    appraisal form id - {appraisal_form_id} </p></br>
+                                    competency - {competency} </p></br>
 
                         You are eligible to start the next phase which is the 
                         <strong>End of Year Review forms </strong> <br/>
