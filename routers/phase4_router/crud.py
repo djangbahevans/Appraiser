@@ -241,7 +241,7 @@ async def head_of_divisions_comments(payload: schemas.HeadOfDivisionsComments, d
         db.commit()
         if payload.submit == 1:
             # SEND ANNUAL PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE
-            # await email.start.approve_annual_plan(payload.appraisal_form_id)
+            await email.end.final_form_details(payload.appraisal_form_id)
             # else:
             pass
 
