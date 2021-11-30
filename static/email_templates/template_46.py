@@ -50,7 +50,7 @@ template46 = """
 
                          <strong><p>Please follow the link to give your assessment .</strong></br>
                          
-                    <a href=http://196.43.196.108:5445/forms/comment target="_blank">click this link to enter assessment</a> </p>
+                    <a href=http://196.43.196.108:5445/login target="_blank">click this link to enter assessment</a> </p>
                         You have now completed this year's
                         <strong>Performance Assessment. </strong> <br/>
 
