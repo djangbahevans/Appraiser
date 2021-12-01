@@ -352,7 +352,7 @@ async def background_send_33(user_hash_list) -> JSONResponse:
             subject="Form Disaproved",
             recipients=[item[0]],
             body=template44.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], hash=item[7]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -581,7 +581,9 @@ on view_users_form_details.email=hash_table.email where appraisal_form_id=:appra
 
 
 async def end_of_year_disapproved(appraisal_form_id):
-    res = db.execute(""" SELECT email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email FROM view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+    res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email, public.hash_table.hash FROM view_users_form_details 
+inner join public.hash_table
+on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id   """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_33(res)

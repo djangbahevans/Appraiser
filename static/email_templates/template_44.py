@@ -42,6 +42,9 @@ template44 = """
                         disapproved by your supervisor.</p>
 
                         <p>Please refill the form.</p>
+                        <strong><p>Please follow the link to refill the forms .</strong></br>
+                         
+                    <a href=http://196.43.196.108:5445/forms/end-year/{hash} target="_blank">click this link to enter assessment</a> </p>
 
                         The forms will be avilable untill the deadline is reached
                         <strong></strong> <br/>
