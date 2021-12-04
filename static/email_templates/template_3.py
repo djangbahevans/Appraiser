@@ -39,7 +39,7 @@ template3 = """
        
                 <h3> <p>Dear All,</p> </h3> </div>
                
-
+                <h3> <p>Dear Staff,</p> </h3
                     <p>As a requirement for the completion
                         of your Annual appraisal form, the end of year
                         form is provided to all staff.</p>
@@ -55,7 +55,7 @@ template3 = """
                        
                         <strong>
                           Thank You. <br/>
-                          Performance Planning Form 
+                          Performance Appraisal Admin
                         </strong> 
                     </p>
             </p>

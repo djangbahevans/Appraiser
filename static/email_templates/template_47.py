@@ -4,7 +4,7 @@ template47 = """
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Demystifying Email Design</title>
+    <title>Appraisal Management </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style type="text/css">
 
@@ -18,8 +18,9 @@ template47 = """
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
     <tr>
-    <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0;">
-        <img src="https://assets.codepen.io/210284/h1_1.gif" width="300" height="230" style="display: block;" />
+    <td align="center" bgcolor="#007CC7" style="padding: 40px 0 30px 0;">
+      <img src="images/image-1.png" alt="aiti logo" style="width:199px;height:69px;">
+       <!-- <p style="color: #ffffff; font-family: Arial, sans-serif; font-size: 36px; font-weight: bolder;">Appraisal Management</p> -->
     </td>
     </tr>
     <tr>
@@ -34,77 +35,77 @@ template47 = """
             <td style="color: #153643; font-family: Arial, sans-serif; font-size: 22px; line-height: 24px; padding: 20px 0 30px 0;">
             <!-- <p style="margin: 0;"><font style= "size :2, text-decoration:"> -->
 
-                <img alt="aiti.png" src="https://www.aiti-kace.com.gh/sites/default/files/aiti.png" style="width:199px;height:69px;">
+                <!-- <img alt="aiti.png" src="images/image-1.png" style="width:199px;height:69px;"> -->
        
-                <h3> <p>Dear Head {firstname},</p> </h3>
+                <h3> <p>Dear {firstname},</p> </h3>
 
 
 
-                        <p>Below are the details of your performance for the year</p>
-                        <p>Core Competencies Assessment Score - {core_assessments}</p>
-                        <p>Non-Core Competencies Assessment Score - {non_core_assessments}</p>
-                        <p>Total Score - {total_score}</p>
-                        <p>Overall Rating - {overall_rating}</p>
-                        <p>Appraisee comments - {appraisees_comments_and_plan}</p>
-                        <p>Supervisor's comments - {appraisal_comment_on_workplan}</p>
-                        <p>Head of division's comments - {head_of_divisions_comments}</p>
+                        <p>
+                            <strong>Below are the details of your performance this year</strong></p>
+                        1. Core Competencies Assessment Score - {core_assessments}</br>
+                        2. Non-Core Competencies Assessment Score - {non_core_assessments}</br>
+                        3. Total Score - {total_score}</br>
+                        4. Overall Rating - {overall_rating}</br>
+                        5. Appraisee comments - {appraisees_comments_and_plan}</br>
+                        6. Supervisor's comments - {appraisal_comment_on_workplan}</br>
+                        7. Head of division's comments - {head_of_divisions_comments}</p></br>
                    
                         
                         You have now completed this year's
                         <strong>Performance Assessment. </strong> <br/>
 
                         Thank You. <br/>
-                        Appraiser-App Admin
-                     </p>
-
-            </p>
-           
-            </p>
- 
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-                <tr>
-                <td width="260" valign="top">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-                   
-                    </table>
-                </td>
-                </tr>
-            </table>
-            </td>
-        </tr>
-        </table>
-    </td>
-    </tr>
-    <tr>
-    <td bgcolor="#70bbd9" style="padding: 30px 30px;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-            <p style="margin: 0;">&reg; Aiti<br/>
-           
-            </td>
-            <td align="right">
-            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
-                <tr>
-       
-                <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+                        Performance Appraisal Admin
+                    </p>
+                </p>
                
-                </tr>
+                </p>
+     
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                    <tr>
+                    <td width="260" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                       
+                        </table>
+                    </td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
             </table>
+        </td>
+        </tr>
+        <tr>
+        <td bgcolor="#007CC7" style="padding: 30px 30px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+            <tr>
+                <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
+                <p style="margin: 0;">&reg; Aiti<br/>
+               
+                </td>
+                <td align="right">
+                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                    <tr>
+           
+                    <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+                   
+                    </tr>
+                </table>
+                </td>
+            </tr>
+            </table>
+        </td>
+        </tr>
+    </table>
             </td>
         </tr>
         </table>
-    </td>
-    </tr>
-</table>
-        </td>
-    </tr>
-    </table>
-</body>
-</html>
+    </body>
+    </html>
 
 """

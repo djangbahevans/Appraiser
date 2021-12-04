@@ -4,7 +4,7 @@ template25 = """
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Demystifying Email Design</title>
+    <title>Appraisal Management </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style type="text/css">
 
@@ -18,8 +18,9 @@ template25 = """
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
     <tr>
-    <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0;">
-        <img src="https://assets.codepen.io/210284/h1_1.gif" width="300" height="230" style="display: block;" />
+    <td align="center" bgcolor="#007CC7" style="padding: 40px 0 30px 0;">
+      <img src="images/image-1.png" alt="aiti logo" style="width:199px;height:69px;">
+       <!-- <p style="color: #ffffff; font-family: Arial, sans-serif; font-size: 36px; font-weight: bolder;">Appraisal Management</p> -->
     </td>
     </tr>
     <tr>
@@ -34,9 +35,9 @@ template25 = """
             <td style="color: #153643; font-family: Arial, sans-serif; font-size: 22px; line-height: 24px; padding: 20px 0 30px 0;">
             <!-- <p style="margin: 0;"><font style= "size :2, text-decoration:"> -->
 
-                <img alt="aiti.png" src="https://www.aiti-kace.com.gh/sites/default/files/aiti.png" style="width:199px;height:69px;">
+                <!-- <img alt="aiti.png" src="images/image-1.png" style="width:199px;height:69px;"> -->
        
-                <h3> <p>Dear Sir/Madam,</p> </h3>
+                <h3> <p>Dear Staff,</p> </h3>
 
                         <p>Please review and approve or disapprove forms of appraisee under you
                         for the start of the yearly appraisal form details.</p>
@@ -46,65 +47,63 @@ template25 = """
 
                         <strong><p>View the form details to keep track of its progress.</strong></br>
                         
-                                    progress review - {progress_review}</br>
-                                    remarks - {remarks}</br>
-                                    competency - {competency}</p></br>
+                                    1. Progress review - {progress_review}</br>
+                                    2. Remarks - {remarks}</br>
+                                    3. Competency - {competency}</p></br>
 
-                        The forms will be avilable untill the start of the
+                        The forms will be avilable for reference in the
                         <strong>Mid-Year Review process  </strong> <br/>
 
                         Thank You. <br/>
-                        Appraiser-App Admin
-                     </p>
-
-            </p>
-           
-            </p>
- 
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-                <tr>
-                <td width="260" valign="top">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                            Performance Appraisal Admin
+                        </p>
+                    </p>
                    
-                    </table>
-                </td>
+                    </p>
+         
+                    </td>
                 </tr>
-            </table>
-            </td>
-        </tr>
-        </table>
-    </td>
-    </tr>
-    <tr>
-    <td bgcolor="#70bbd9" style="padding: 30px 30px;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-            <p style="margin: 0;">&reg; Aiti<br/>
-           
-            </td>
-            <td align="right">
-            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
                 <tr>
-       
-                <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
-               
+                    <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                        <tr>
+                        <td width="260" valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                           
+                            </table>
+                        </td>
+                        </tr>
+                    </table>
+                    </td>
                 </tr>
-            </table>
+                </table>
             </td>
-        </tr>
+            </tr>
+            <tr>
+            <td bgcolor="#007CC7" style="padding: 30px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
+                    <p style="margin: 0;">&reg; Aiti<br/>
+                   
+                    </td>
+                    <td align="right">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                        <tr>
+               
+                        <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+                       
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+                </table>
+            </td>
+            </tr>
         </table>
-    </td>
-    </tr>
-</table>
-        </td>
-    </tr>
-    </table>
-</body>
-</html>
-
+                </td>
+            </tr>
+            </table>
+        </body>
+        </html>
 """

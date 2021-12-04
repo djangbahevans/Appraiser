@@ -37,25 +37,25 @@ template2 = """
 
                 <!-- <img alt="aiti.png" src="images/image-1.png" style="width:199px;height:69px;"> -->
        
-                <h3> <p>Dear All,</p> </h3> </div>
+                <h3> <p>Dear Staff,</p> </h3> </div>
                
 
-                    <p>As a requirement for the completion
-                        of your Annual appraisal form, the Mid-Year
-                        form is provided to all staff.</p>
-                       
-                        <p>Your MId-Year Review form for the year has
+                        <p>As a requirement for the completion
+                        of your Annual Performance Appraisal, the Mid-Year Review
+                        Form is made available to all staff.</p>
+                        
+                        <p>Your Mid-Year Review form for the year has
                         been made available to you.</p>
                        
                         <strong><p>Please fill the form by opening the link provided.</strong></br>
-                        <a href="{url}/{hash}" target="_blank">click this link to fill form</a> </p>
+                        <a href="{url}/{hash}" target="_blank">Mid-Year Review Form</a> </p>
                        
                         You are expected to access and fill the form by
                         the end of this month  <br/>
                        
                         <strong>
                           Thank You. <br/>
-                          Performance Planning Form 
+                          Performance Appraisal Admin
                         </strong> 
                     </p>
             </p>
