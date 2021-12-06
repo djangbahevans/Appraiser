@@ -102,23 +102,23 @@ async def read_incompleted_list_end(user_id: int, token: str = Depends(oauth2_sc
 
 # READ DEADLINES
 @router.get("/deadline/")
-async def read_deadline_table(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    return await crud.read_deadline_table_auth(token, db)
+async def read_deadline_table(db: Session = Depends(get_db)):
+    return await crud.read_deadline_table(db)
 
 
 @router.get("/deadline/start/")
-async def read_start_deadline(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    return await crud.read_start_deadline_table_auth(token, db)
+async def read_start_deadline(db: Session = Depends(get_db)):
+    return await crud.read_start_deadline_table(db)
 
 
 @router.get("/deadline/mid/")
-async def read_mid_deadline(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    return await crud.read_mid_deadline_table_auth(token, db)
+async def read_mid_deadline(db: Session = Depends(get_db)):
+    return await crud.read_mid_deadline_table(db)
 
 
 @router.get("/deadline/end/")
-async def read_end_deadline(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    return await crud.read_end_deadline_table_auth(token, db)
+async def read_end_deadline(db: Session = Depends(get_db)):
+    return await crud.read_end_deadline_table(db)
 
 
 # GET SUPERVISORS
