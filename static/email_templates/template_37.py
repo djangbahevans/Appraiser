@@ -39,8 +39,8 @@ template37 = """
                         <p>View your final scores and follow the link to give your assessment</p>
                         1. Core Competencies Assessment Score - {core_assessments}</br>
                         2. Non-Core Competencies Assessment Score - {non_core_assessments}</br>
-                        3. Total Score - {total_score}</br>
-                        4. Overall Rating - {overall_rating}</p>
+                        3. Total Score - {overall_total}</br>
+                        4. Overall Rating - {overall_performance_rating}</p>
                          <strong><p>Please follow the link to give your assessment.</strong></br>
                     <a href=http://196.43.196.108:5445/forms/comment/{hash} target="_blank">Add assessment</a> </p>
 

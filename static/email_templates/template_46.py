@@ -40,8 +40,8 @@ template46 = """
                         <p>Below are the scores and comment from your appraisee</p></br>
                         1. Core Competencies Assessment Score - {core_assessments}</br>
                         2. Non-Core Competencies Assessment Score - {non_core_assessments}</br>
-                        3. Total Score - {total_score}</br>
-                        4. Overall Rating - {overall_rating}</br>
+                        3. Total Score - {overall_total}</br>
+                        4. Overall Rating - {overall_performance_rating}</br>
                         5. Appraisee comments - {appraisees_comments_and_plan}</br>
                         6. Supervisor's comments - {appraisal_comment_on_workplan}</p></br>
 

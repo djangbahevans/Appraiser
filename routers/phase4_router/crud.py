@@ -286,7 +286,8 @@ async def overall_performance_rating(appraisal_form_id, db: Session):
 
 
 async def overall_performance(appraisal_form_id, db: Session):
-    overall_performance = db.execute("""SELECT avg(score) as pa_score,avg(score)*0.6 as cpa_score,avg(score)*0.6 as ncpa_score,avg(score)*0.6 as ot_score,(avg(score)*0.6)*100 as op_rating  FROM public.vw_competency where appraisal_form_id=:appraisal_form_id;""", {
+    overall_performance = db.execute("""SELECT firstname, lastname, middlename, email, core_assessments, non_core_assessments, performance_assessment, overall_total, overall_performance_rating
+	FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id;""", {
         'appraisal_form_id': appraisal_form_id})
     overall_performance = overall_performance.fetchall()
     return overall_performance
