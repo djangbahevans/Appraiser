@@ -10,7 +10,7 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     MAIL_PASSWORD: str = os.environ.get('MAIL_PASSWORD') or "eb28ce2abf91e5"
     MAIL_FROM: str = os.environ.get(
         'MAIL_FROM') or "appraisalmanagement2021@gmail.com"
-    MAIL_PORT: int = os.environ.get('MAIL_PORT') or 465
+    MAIL_PORT: int = os.environ.get('MAIL_PORT') or 587
     MAIL_SERVER: str = os.environ.get('MAIL_SERVER') or "smtp.mailtrap.io"
     MAIL_TLS: bool = os.environ.get('MAIL_TLS') or True
     MAIL_SSL: bool = os.environ.get('MAIL_SSL') or False
