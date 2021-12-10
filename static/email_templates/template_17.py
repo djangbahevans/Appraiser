@@ -34,7 +34,7 @@ template17 = """
 
                 <h3> <p>Dear Supervisor,</p> </h3>
                
-                    <p>Please review and approve forms of your appraisee
+                    <p>Please review and approve forms of your appraisee {firstname} {middlename} {lastname}
                     for the start of the year performance assessment details.</p>
 
                     <p>The appraisal form details is currently available here.</p>

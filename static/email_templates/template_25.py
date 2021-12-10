@@ -35,7 +35,7 @@ template25 = """
                 <h3> <p>Dear Staff,</p> </h3>
 
                         <p>Please review and approve or disapprove forms of appraisee under you
-                        for the start of the yearly appraisal form details.</p>
+                        for the Mid Year Review of the yearly appraisal form details.</p>
 
                         <p>The appraisal form details of your appraisee will be provided and made available to you for future
                         reference in completing the mid-year and end of year review forms.</p>
@@ -45,6 +45,10 @@ template25 = """
                                     1. Progress review - {progress_review}</br>
                                     2. Remarks - {remarks}</br>
                                     3. Competency - {competency}</p></br>
+
+                    <strong><p>Please log in to the dashboard to approve.</strong></br>
+                               
+                    <a href=http://196.43.196.108:5445/login target="_blank">Log in</a> </p>
 
                         The forms will be avilable for reference in the
                         <strong>Mid-Year Review process  </strong> <br/>

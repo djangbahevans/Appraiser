@@ -44,12 +44,13 @@ template22 = """
                                     2. Competency - {competency}</br>
                                     3. Supervisor's commens - {midyear_review_comment} </p></br>
 
-
+                        <p>Please follow the link to complete your form.
+                        <a href=http://196.43.196.108:5445/forms/mid-year/{hash} target="_blank">Mid-Year Form</a> </p>
                         The forms will be avilable untill the deadline for Mid-Year Review is reached
                         <strong></strong> <br/>
 
                         Thank You. <br/>
-                            Performance Appraisal Admin
+                        Performance Appraisal Admin
                     </p>
 
 

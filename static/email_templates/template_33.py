@@ -32,12 +32,13 @@ template33 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3>  <p>Dear Staff,</p>  </h3>
+                <h3>  <p>Dear {firstname} {middlename} {lastname},</p>  </h3>
 
                             <p>As a staff requirement, you are reminded that the annual
                             perforance appraisal will end in 3 days time.</p>
 
-                            <p>Please follow the link in the email sent on the start date to complete your form.</p>
+                            <p>Please follow the link to complete your form.
+                        <a href=http://196.43.196.108:5445/forms/end-year/{hash} target="_blank">End of Year Form</a> </p>
 
                             You are expected to access and fill the form provided in
                             <strong>three days time</strong> <br/>

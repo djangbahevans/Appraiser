@@ -286,7 +286,7 @@ async def background_send_38(user_hash_list) -> JSONResponse:
             subject="Form Disaproved",
             recipients=[item[0]],
             body=template22.format(email=item[0], progress_review=item[1], lastname=item[2], staff_id=item[3], firstname=item[4],
-                                   middlename=item[5], competency=item[6], appraisal_form_id=item[7], supervisor_email=item[8], midyear_review_comment=item[9]),
+                                   middlename=item[5], competency=item[6], appraisal_form_id=item[7], supervisor_email=item[8], midyear_review_comment=item[9], hash=item[10]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -446,7 +446,9 @@ async def mid_year_review_approved(appraisal_form_id):
 # @router.post("/midyearreviewdisapproved/")
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
 async def mid_year_review_disapproved(appraisal_form_id):
-    res = db.execute(""" SELECT email, progress_review, lastname, staff_id, firstname, middlename, competency, appraisal_form_id, supervisor_email, midyear_review_comment FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id  """, {
+    res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.progress_review, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.competency, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email, view_users_form_details.midyear_review_comment,  public.hash_table.hash FROM view_users_form_details 
+inner join public.hash_table
+on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_38(res)
