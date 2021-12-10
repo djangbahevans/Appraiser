@@ -529,9 +529,9 @@ async def approve_end_year_review(appraisal_form_id):
 
 async def add_comment_on_workplan(appraisal_form_id):
     res = db.execute("""select  view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email, view_users_form_details.core_assessments, view_users_form_details.non_core_assessments, view_users_form_details.overall_total,  view_users_form_details.overall_performance_rating, view_users_form_details.appraisees_comments_and_plan, public.hash_table.hash
-from public.view_users_form_details
-inner join public.hash_table
-on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id """,
+    from public.view_users_form_details
+    inner join public.hash_table
+    on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id """,
                      {
                          'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM
     res = res.fetchall()
@@ -573,8 +573,8 @@ async def approve_performance_details(appraisal_form_id):
 # @router.post("/endyearreviewapproved/")
 async def end_of_year_approved(appraisal_form_id):
     res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email,  core_assessments, non_core_assessments,  overall_total, overall_performance_rating, public.hash_table.hash FROM view_users_form_details 
-inner join public.hash_table
-on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id  """, {
+    inner join public.hash_table
+    on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_19(res)
@@ -582,8 +582,8 @@ on view_users_form_details.email=hash_table.email where appraisal_form_id=:appra
 
 async def end_of_year_disapproved(appraisal_form_id):
     res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.middlename, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email, public.hash_table.hash FROM view_users_form_details 
-inner join public.hash_table
-on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id   """, {
+    inner join public.hash_table
+    on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id   """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_33(res)

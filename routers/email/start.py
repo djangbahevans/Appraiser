@@ -472,8 +472,8 @@ async def annual_plan_approved(appraisal_form_id):
 # TAKE APPRAISAL FORM ID FROM "approve_form" FUNCTION IN appraiser Router, crud.py
 async def annual_plan_disapproved(appraisal_form_id):
     res = db.execute(""" SELECT view_users_form_details.email, view_users_form_details.target, view_users_form_details.lastname, view_users_form_details.staff_id, view_users_form_details.firstname, view_users_form_details.resources, view_users_form_details.middlename, view_users_form_details.result_areas, view_users_form_details.appraisal_form_id, view_users_form_details.supervisor_email, view_users_form_details.annual_plan_comment, public.hash_table.hash FROM view_users_form_details 
-inner join public.hash_table
-on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id  """, {
+    inner join public.hash_table
+    on view_users_form_details.email=hash_table.email where appraisal_form_id=:appraisal_form_id  """, {
                      'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL FROM DB USING APPRAISAL FORM ID IN APPROVE FORM
     res = res.fetchall()
     return await background_send_33(res)
