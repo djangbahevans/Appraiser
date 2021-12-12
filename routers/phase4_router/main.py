@@ -34,27 +34,27 @@ async def read_final_completed_list(user_id: int, token: str = Depends(oauth2_sc
     return await crud.read_final_completed_list_auth(user_id, token, db)
 
 
-@router.get("/performanceassessmentscore")
+# @router.get("/performanceassessmentscore")
 async def read_performance_assessment_score(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.performance_assessment_score(appraisal_form_id, db)
 
 
-@router.get("/coreperformanceassessmentscore")
+# @router.get("/coreperformanceassessmentscore")
 async def read_core_performance_assessment_score(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.core_performance_assessment_score(appraisal_form_id, db)
 
 
-@router.get("/noncoreperformanceassessmentscore")
+# @router.get("/noncoreperformanceassessmentscore")
 async def read_non_core_performance_assessment_score(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.non_core_performance_assessment_score(appraisal_form_id, db)
 
 
-@router.get("/overalltotalscore")
+# @router.get("/overalltotalscore")
 async def overall_total_score(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.overall_total_score(appraisal_form_id, db)
 
 
-@router.get("/overallperformancerating")
+# @router.get("/overallperformancerating")
 async def overall_performance_rating(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.overall_performance_rating(appraisal_form_id, db)
 
@@ -62,6 +62,11 @@ async def overall_performance_rating(appraisal_form_id: int, db: Session = Depen
 @router.get("/overallperformance")
 async def overall_performance(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.overall_performance(appraisal_form_id, db)
+
+
+@router.get("/finalformdetails")
+async def final_form_details(appraisal_form_id: int, db: Session = Depends(get_db)):
+    return await crud.final_form_details(appraisal_form_id, db)
 
 
 @router.get("/endofyearreview/")

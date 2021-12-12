@@ -32,13 +32,11 @@ template6 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3> <p>Dear All,</p> </h3>
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
                 <p>This message is to remind you that the first phase of yearly appraisal management begins in three days time. A link will be sent to this mail for you to fill your forms on the start date </p>
-
-                <p>The appraisal form details will be provided and made available to
-                you  below.</p>
-
+                    <strong><p>Please fill the form by opening the link provided onthe start date.</strong></br>
+                    <a href="{url}/{hash}" target="_blank">Form cannot be submitted now</a> </p>
                 You should expect a link to start filling your forms in 
                 <strong>three days</strong> <br/>
 

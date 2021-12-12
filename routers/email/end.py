@@ -71,7 +71,8 @@ async def background_send_2(user_hash_list, background_tasks) -> JSONResponse:
         message = MessageSchema(
             subject="End-Year Review Form",
             recipients=[item[1]],
-            body=template3.format(url=settings.END_URL, hash=item[0]),
+            body=template3.format(
+                url=settings.END_URL, hash=item[0], firstname=item[2], middlename=item[3], lastname=item[4]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -95,9 +96,10 @@ async def background_send_37(user_hash_list, background_tasks) -> JSONResponse:
     for item in user_hash_list:  # CREATE VARIABLES FOR EMAIL TEMPLATES
         message = MessageSchema(
             subject="Start End-Year Review",
-            recipients=[item[0]],  # INDEX OF EMAIL FROM DB QUERY
+            recipients=[item[1]],  # INDEX OF EMAIL FROM DB QUERY
             # VARIABLES IN TEMPLATES STORING URL AND HASH
-            body=template3.format(url=settings.END_URL, hash=item[1]),
+            body=template3.format(
+                url=settings.END_URL, hash=item[0], firstname=item[2], middlename=item[3], lastname=item[4]),
             subtype="html"
         )
         background_tasks.add_task(fm.send_message, message)
@@ -185,7 +187,8 @@ async def background_send_20(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="End-Year Review (Three Days To Start Reminder)",
             recipients=[item[1]],  # INDEX OF EMAIL FROM DB
-            body=template29,
+            body=template29.format(
+                url=settings.END_URL, hash=item[0], firstname=item[2], middlename=item[3], lastname=item[4]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -253,7 +256,8 @@ async def background_send_26(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Start End-Year Review",
             recipients=[item[1]],
-            body=template30.format(url=settings.END_URL, hash=item[0]),
+            body=template30.format(
+                url=settings.END_URL, hash=item[0], firstname=item[2], middlename=item[3], lastname=item[4]),
             subtype="html"
         )
         await fm.send_message(message)
@@ -401,7 +405,8 @@ async def background_send_98(user_hash_list) -> JSONResponse:
 # SEND END-YEAR LINK TO ALL STAFF
 @ router.post("/endyearreviewemail/")
 async def start_endyear_review_(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
-    res = db.execute("""SELECT * FROM public.hash_table""")
+    res = db.execute("""SELECT hash_table.hash, hash_table.email, staff.fname, staff.oname, staff.sname
+	FROM public.hash_table inner join public.staff on hash_table.email=staff.email;""")
     res = res.fetchall()
     return await background_send_2(res, background_tasks)
 
@@ -409,7 +414,8 @@ async def start_endyear_review_(background_tasks: BackgroundTasks, db: Session =
 # SEND END-YEAR LINK TO INDIVIDUAL STAFF
 @ router.post("/endyearreviewemailstaff/")
 async def end_year_review_staff(email: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
-    res = db.execute("""SELECT email, hash FROM public.hash_table where email=:email""", {
+    res = db.execute("""SELECT hash_table.hash, hash_table.email, staff.fname, staff.oname, staff.sname
+	FROM public.hash_table inner join public.staff on hash_table.email=staff.email where hash_table.email=:email""", {
         'email': email})  # SELECT EMAIL AND HASH PAIR FROM HASH TABLE
     res = res.fetchall()
     return await background_send_37(res, background_tasks)
@@ -454,7 +460,8 @@ async def start_endyear_review_reminder(background_tasks: BackgroundTasks, super
 # @router.post("/threedaysreminder/")
 async def three_days_to_end_reminder():
     res = db.execute(
-        """SELECT * FROM public.hash_table""")  # SELECT EMAIL FROM HASH TABLE
+        """SELECT hash_table.hash, hash_table.email, staff.fname, staff.oname, staff.sname
+	    FROM public.hash_table inner join public.staff on hash_table.email=staff.email;""")  # SELECT EMAIL FROM HASH TABLE
     res = res.fetchall()
     return await background_send_20(res)
 
@@ -462,7 +469,8 @@ async def three_days_to_end_reminder():
 # @router.post("/startday/")
 async def start_end_year_review():
     res = db.execute(
-        """SELECT * FROM public.hash_table""")  # SELECT EMAIL FROM HASH TABLE
+        """SELECT hash_table.hash, hash_table.email, staff.fname, staff.oname, staff.sname
+	    FROM public.hash_table inner join public.staff on hash_table.email=staff.email;""")  # SELECT EMAIL FROM HASH TABLE
     res = res.fetchall()
     return await background_send_26(res)
 
@@ -539,7 +547,7 @@ async def add_comment_on_workplan(appraisal_form_id):
 
 
 async def add_head_of_division_comments(appraisal_form_id):
-    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email, core_assessments, non_core_assessments,  overall_total, overall_performance_rating, appraisees_comments_and_plan,appraisal_comment_on_workplan from public.view_users_form_details
+    res = db.execute("""select  email, lastname, staff_id, firstname, middlename, appraisal_form_id, supervisor_email, core_assessments, non_core_assessments,  overall_total, overall_performance_rating,      appraisees_comments_and_plan,appraisal_comment_on_workplan from public.view_users_form_details
                         where appraisal_form_id=:appraisal_form_id """,
                      {
                          'appraisal_form_id': appraisal_form_id})  # SELECT EMAIL OF SUPERVISOR FROM DB USING APPRAISAL FORM ID IN ANNUAL PLAN FORM

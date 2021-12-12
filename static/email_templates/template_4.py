@@ -32,16 +32,16 @@ template4 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
 
-                <h3> <p>Dear All,</p> </h3> 
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3> 
                
                     <p>As a requirement for the completion
-                    of your Annual appraisal form, the MIdyear Review
+                    of your Annual appraisal form, the Mid Year Review
                     Form will be provided to all staff in three days time.</p>
 
-                    <p>KIndly follow the link you receive on the start date to fill your foms.</p>
-
-                    <strong><p>Please fill the form by opening the link provided.</strong></br>
-                
+                   
+                     <strong><p>Please fill the form by opening the link provided in three days time.</strong></br>
+                     <a href="{url}/{hash}" target="_blank">Mid-Year Review Form cannot be submitted now</a> </p>
+                       
 
                     You are expected to access and fill the form by
                     <strong>in three days time </strong> <br/>

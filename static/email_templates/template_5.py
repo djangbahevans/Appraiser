@@ -32,7 +32,7 @@ template5 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3> <p>Dear Sir/Madam,</p> </h3>
+                <h3> <p>Dear Supervisor,</p> </h3>
 
                         <p>Please review and approve or disapprove forms of appraisee 
                         for the start of the year appraisal form details.</p>

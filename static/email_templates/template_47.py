@@ -32,7 +32,7 @@ template47 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3> <p>Dear {firstname},</p> </h3>
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
 
                         <p>
                             <strong>Below are the details of your performance this year</strong></p>

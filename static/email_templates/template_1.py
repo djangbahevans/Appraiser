@@ -32,7 +32,7 @@ template1 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3> <p>Dear Staff,</p> </h3> 
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3> 
                
                     <p>As a requirement for the completion
                         of your Annual Performance Appraisal, the Start of Year Review

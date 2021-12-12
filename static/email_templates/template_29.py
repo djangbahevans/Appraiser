@@ -32,17 +32,15 @@ template29 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
        
-                <h3> <p>Dear Staff,</p> </h3>
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3>
                
 
                     <p>As a requirement for the completion
                     of your Annual Performance Appraisal, the End of Year Review
                     Form will be provided to all staff in three days time.</p>
 
-                    <p>KIndly follow the link you receive on the start date to fill your foms.</p>
-
-                    <strong><p>Please fill the form by opening the link provided.</strong></br>
-                
+                   <strong><p>Please fill the form by opening the link provided onthe start date.</strong></br>
+                    <a href="{url}/{hash}" target="_blank">Form cannot be submitted now</a> </p>
 
                     You are expected to access and fill the form by
                     <strong>in three days time </strong> <br/>

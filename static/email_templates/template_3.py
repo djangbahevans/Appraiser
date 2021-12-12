@@ -32,7 +32,7 @@ template3 = """
         <tr>
             <td style="color: #153643; font-family: Roboto, sans-serif; font-size: 20px; line-height: 24px; padding: 20px 0 30px 0;">
                
-                <h3> <p>Dear Staff,</p> </h3
+                <h3> <p>Dear {firstname} {middlename} {lastname},</p> </h3
 
                     <p>As a requirement for the completion
                         of your Annual appraisal form, the end of year
@@ -42,7 +42,7 @@ template3 = """
                         been made available to you.</p>
                        
                         <strong><p>Please fill the form by opening the link provided.</strong></br>
-                        <a href="{url}/{hash}" target="_blank">click this link to fill form</a> </p>
+                        <a href="{url}/{hash}" target="_blank">End of Year Form</a> </p>
                        
                         You are expected to access and fill the form by
                         the end of this month  <br/>

@@ -34,7 +34,7 @@ template39 = """
        
                 <h3> <p>Dear Sir/Madam,</p> </h3>
 
-                        <p>Please review and approve or disapprove forms of your appraisee
+                        <p>Please review and approve or disapprove forms of your appraisee {firstname} {middlename} {lastname}
                         for the Mid Year Review  form details.</p>
 
                         <p>The appraisal form details of your appraisee will be provided and made available to you for future

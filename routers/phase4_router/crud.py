@@ -291,3 +291,10 @@ async def overall_performance(appraisal_form_id, db: Session):
         'appraisal_form_id': appraisal_form_id})
     overall_performance = overall_performance.fetchall()
     return overall_performance
+
+
+async def final_form_details(appraisal_form_id, db: Session):
+    final_form_details = db.execute("""SELECT * FROM public.view_users_form_details where appraisal_form_id=:appraisal_form_id;""", {
+        'appraisal_form_id': appraisal_form_id})
+    final_form_details = final_form_details.fetchall()
+    return final_form_details
