@@ -14,6 +14,11 @@ async def read_appraisees_commented_list(user_id: int, token: str = Depends(oaut
     return await crud.read_appraisees_commented_list_auth(user_id, token, db)
 
 
+@router.get("/hodapprovedlist/")
+async def read_hod_approved_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.read_hod_approved_list_auth(user_id, token, db)
+
+
 @router.get("/appraiseesnotcommentlist/")
 async def read_appraisees_not_commented_list(user_id: int, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     return await crud.read_appraisees_not_commented_list_auth(user_id, token, db)

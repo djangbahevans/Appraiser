@@ -40,6 +40,35 @@ async def read_appraisees_commented_list_auth(user_id: int, token: str, db: Sess
                             "WWW-Authenticate": "Bearer"})
 
 
+async def read_hod_approved_list(user_id: int, db: Session):
+    res = db.execute(
+        """SELECT public.get_list_of_hod_commented(:user_id)""", {
+            'user_id': user_id})  # GET FROM DB FUNCTION
+    res = res.fetchall()
+    return res
+
+
+async def read_hod_approved_list_auth(user_id: int, token: str, db: Session):
+    try:
+        if await is_token_blacklisted(token, db):
+            raise UnAuthorised('token blacklisted')
+        token_data = utils.decode_token(data=token)
+        if token_data:
+            return await read_appraisees_commented_list(user_id, db)
+        else:
+            raise HTTPException(status_code=401, detail="{}".format(
+                sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except UnAuthorised:
+        raise HTTPException(status_code=401, detail="{}".format(
+            sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="access token expired", headers={
+                            "WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=500, detail="decode error not enough arguments", headers={
+                            "WWW-Authenticate": "Bearer"})
+
+
 async def read_appraisees_not_commented_list(user_id: int, db: Session):
     res = db.execute("""SELECT public.get_list_of_appraisees_not_commented(:user_id)""", {
         'user_id': user_id})  # GET FROM DB FUNCTION
