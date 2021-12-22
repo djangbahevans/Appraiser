@@ -81,4 +81,4 @@ async def create_competency_details(score: List[schemas.CompDetails], db: Sessio
 
 @router.post("/performancedetails/")
 async def create_performance_details(payload: schemas.create_performance_details, db: Session = Depends(get_db)):
-    return await crud.performance_details(payload.appraisal_form_id, payload.weight, payload.comments, payload.final_score, payload.approved_date, payload.submit, db)
+    return await crud.performance_details(payload.appraisal_form_id, payload.weight, payload.comments, payload.final_score, payload.approved_date, payload.submit, payload.p_a, db)

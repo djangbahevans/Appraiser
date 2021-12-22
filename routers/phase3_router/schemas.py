@@ -36,6 +36,7 @@ class PerformanceDetails(BaseModel):
     final_score: str
     approved_date: datetime
     submit: int
+    p_a: str
 
 
 class create_performance_details(PerformanceDetails):
