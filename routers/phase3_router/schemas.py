@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import datetime, time, timedelta, date
 from typing import List, Optional, Union
 from pydantic import BaseModel
 from enum import Enum
@@ -40,6 +40,18 @@ class PerformanceDetails(BaseModel):
 
 
 class create_performance_details(PerformanceDetails):
+    pass
+
+
+class TrainingReceived(BaseModel):
+    institution: str
+    date: date
+    programme: str
+    appraisal_form_id: int
+    submit: int
+
+
+class training_received(TrainingReceived):
     pass
 
 
