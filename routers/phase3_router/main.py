@@ -86,4 +86,4 @@ async def create_performance_details(payload: schemas.create_performance_details
 
 @router.post("/trainingreceived/")
 async def training_received(payload: schemas.training_received, db: Session = Depends(get_db)):
-    return await crud.training_received(payload.institution, payload.date, payload.programme, payload.appraisal_form_id, payload.submit, db)
+    return await crud.training_received(payload.institution, payload.training_date, payload.programme, payload.appraisal_form_id, payload.submit, db)

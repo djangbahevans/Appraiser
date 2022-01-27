@@ -128,15 +128,15 @@ async def performance_details(appraisal_form_id, weight, comments, final_score, 
         return JSONResponse(status_code=404, content={"message": "deadline has passed!"})
 
 
-async def training_received(institution, date, programme, appraisal_form_id, submit, db: Session):
+async def training_received(institution, training_date, programme, appraisal_form_id, submit, db: Session):
     query = db.execute(
         """ SELECT ending FROM public.deadline WHERE deadline_type = 'End'; """)  # READ DEADLINE FOR PHASE-1
     query = query.first()[0]
     if query >= date.today():  # CHECK IF DEADLINE HAS NOT PASSED BEFORE CREATING ANNUAL PLAN
         res = db.execute("""INSERT INTO public.training_received(institution, date, programme, appraisal_form_id, submit)
-	                            values(:institution, :date, :programme, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
+	                            values(:institution, :training_date, :programme, :appraisal_form_id, :submit) on conflict (appraisal_form_id) do
 	                                update set institution = EXCLUDED.institution, date = EXCLUDED.date, programme = EXCLUDED.programme, submit = EXCLUDED.submit; """,
-                         {'institution': institution, 'date': date, 'programme': programme, 'appraisal_form_id': appraisal_form_id, 'submit': submit})  # CREATE INTO TABLE
+                         {'institution': institution, 'training_date': training_date, 'programme': programme, 'appraisal_form_id': appraisal_form_id, 'submit': submit})  # CREATE INTO TABLE
         db.commit()
         if submit == 1:
             # SEND PERFORMANCE PLAN DETAILS TO SUPERVISOR'S EMAIL TO REVIEW AND APPROVE

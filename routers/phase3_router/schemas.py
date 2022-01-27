@@ -45,7 +45,7 @@ class create_performance_details(PerformanceDetails):
 
 class TrainingReceived(BaseModel):
     institution: str
-    date: date
+    training_date: str
     programme: str
     appraisal_form_id: int
     submit: int
