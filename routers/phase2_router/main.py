@@ -15,6 +15,12 @@ async def read_mid_year_review(db: Session = Depends(get_db)):
     return await crud.read_mid_year_review(db)
 
 
+# READ MIDYEAR REVIEW
+@router.get("/midyearreviewid/{appraisal_form_id}/")
+async def read_midyear_review(appraisal_form_id: int, db: Session = Depends(get_db)):
+    return await crud.read_midyear_review(appraisal_form_id, db)
+
+
 # READ TARGETS
 @router.get("/targets/")
 async def targets(appraisal_form_id: int, db: Session = Depends(get_db)):

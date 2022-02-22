@@ -15,6 +15,15 @@ async def read_mid_year_review(db: Session):
     res = res.fetchall()
     return res
 
+# READ MID-YEAR REVIEW WITH APPRAISAL FORM ID
+
+
+async def read_midyear_review(appraisal_form_id, db: Session):
+    res = db.execute("""SELECT * FROM public.midyear_review where appraisal_form_id=:appraisal_form_id;""", {
+                     'appraisal_form_id': appraisal_form_id})
+    res = res.fetchall()
+    return res
+
 
 # READ TARGETS
 async def read_targets(appraisal_form_id, db: Session):
