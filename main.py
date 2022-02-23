@@ -19,7 +19,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/authenticate")
 settings = config.Settings() # SETTINGS FROM CONFIG.PY WHERE VARIABLES ARE STORED IN ONE ENVIRONMENT
 
 # GIVE PERMISSION TO FRONTEND
-origins = ["*"]
+origins = ["*", "http://localhost"]
 api.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
