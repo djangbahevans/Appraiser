@@ -2,8 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Body
 from pydantic import UUID4, EmailStr
 from sqlalchemy.orm import Session
 from typing import List, Optional
+
+from routers.phase3_router import models
 from . import crud, schemas
-from main import get_db
+from main import get_db, oauth2_scheme
 from datetime import datetime
 
 router = APIRouter()
@@ -63,11 +65,14 @@ async def read_competencies(db: Session = Depends(get_db)):
 async def read_competency_by_id(competency_id: int, db: Session = Depends(get_db)):
     return await crud.read_specific_competency(competency_id, db)
 
+@router.put("/competencies/{id}")
+async def update_competency_by_id(competency: models.Competency, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    return await crud.edit_specific_competency(competency, db)
+    
 
 @router.get("/endofyearreview/")
 async def end_of_year_review(appraisal_form_id: int, db: Session = Depends(get_db)):
     return await crud.read_endofyear_review(appraisal_form_id, db)
-
 
 # @router.post("/annualappraisal/")
 async def create_annual_appraisal(payload: schemas.create_annual_appraisal, db: Session = Depends(get_db)):

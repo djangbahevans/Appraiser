@@ -1,12 +1,16 @@
-from ..auth_router.crud import UnAuthorised, is_token_blacklisted, utils, HTTPException, jwt
-from fastapi import Depends, HTTPException, Response, status, Body, Header
-from fastapi import Depends, HTTPException, BackgroundTasks
-from starlette.responses import JSONResponse
-from datetime import datetime, date
-from sqlalchemy.orm import Session
-from . import models, schemas
-from .. import email
+import sys
+from datetime import date, datetime
 from typing import List
+
+from fastapi import (BackgroundTasks, Body, Depends, Header, HTTPException,
+                     Response, status)
+from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
+
+from .. import email
+from ..auth_router.crud import (HTTPException, UnAuthorised,
+                                is_token_blacklisted, jwt, utils)
+from . import models, schemas
 
 # READ END OF YEAR REVIEW
 
@@ -43,6 +47,33 @@ async def read_specific_competency(competency_id, db: Session):
                      'competency_id': competency_id})
     res = res.fetchall()
     return res
+
+
+async def update_competency(competency: models.Competency, db: Session):
+    res = db.execute(""" UPDATE competency SET category=:category, sub=:sub, main=:main, weight=:weight WHERE competency_id=:competency_id """, {
+                     "category": competency.category, "sub": competency.sub, "weight": competency.weight, "main": competency.main, "competency_id": competency.competency_id})
+    db.commit()
+    return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "Competency has been updated successfully"})
+
+
+async def edit_specific_competency(competency: models.Competency, token: str, db: Session):
+    try:
+        if await is_token_blacklisted(token, db):
+            raise UnAuthorised('token blacklisted')
+        token_data = utils.decode_token(data=token)
+        if token_data == 1:
+            return await update_competency(competency, db)
+        else:
+            return UnAuthorised('Not qualified')
+    except UnAuthorised:
+        raise HTTPException(status_code=401, detail="{}".format(
+            sys.exc_info()[1]), headers={"WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="access token expired", headers={
+                            "WWW-Authenticate": "Bearer"})
+    except jwt.exceptions.DecodeError:
+        raise HTTPException(status_code=500, detail="decode error not enough arguments", headers={
+                            "WWW-Authenticate": "Bearer"})
 
 
 async def read_endofyear_review(appraisal_form_id, db: Session):
