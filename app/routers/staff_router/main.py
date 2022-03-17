@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.main import oauth2_scheme
+from app.oauth2 import oauth2_scheme
 
 from . import crud, schemas
 

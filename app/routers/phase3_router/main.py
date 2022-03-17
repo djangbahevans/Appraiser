@@ -1,7 +1,7 @@
 from typing import List
 
 from app.database import get_db
-from app.main import oauth2_scheme
+from app.oauth2 import oauth2_scheme
 from fastapi import APIRouter, Depends
 from app.routers.phase3_router import models
 from sqlalchemy.orm import Session

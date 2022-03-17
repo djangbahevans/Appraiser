@@ -1,7 +1,6 @@
 # IMPORT DEPENDENCIES
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer
 
 from app.database import engine
 from app.routers.appraiser import main as appraiser
@@ -18,8 +17,6 @@ from app.routers.user_router import main as user
 from app.routers.user_router import models
 
 api = FastAPI(docs_url="/api/docs")
-# INITIATE AUTHENTICATION SCHEME
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/authenticate")
 
 # GIVE PERMISSION TO FRONTEND
 origins = ["*", "http://localhost"]
