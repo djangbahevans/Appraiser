@@ -22,6 +22,10 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     MID_URL: str = 'http://196.43.196.108:5445/forms/mid-year'
     END_URL: str = 'http://196.43.196.108:5445/forms/end-year'
     PASSWORD_URL: str = 'http://196.43.196.108:5445/forms/start'
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str
+    POSTGRES_DOMAIN: str
 
     class Config:
         title = 'Base Settings'

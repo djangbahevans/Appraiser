@@ -1,13 +1,8 @@
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from datetime import timedelta
 
-from apscheduler.executors.pool import ProcessPoolExecutor, ThreadPoolExecutor
-from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from app.config import settings
 from app.database import SessionLocal
-from fastapi import APIRouter, BackgroundTasks, Depends
-from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
-from sqlalchemy.orm import Session
-from starlette.responses import JSONResponse
 # IMPORT EMAILTENPLATES
 from app.static.email_templates.template_1 import template1
 from app.static.email_templates.template_2 import template2
@@ -37,8 +32,12 @@ from app.static.email_templates.template_25 import template25
 from app.static.email_templates.template_26 import template26
 from app.static.email_templates.template_27 import template27
 from app.static.email_templates.template_28 import template28
-
-from app.config import settings
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from fastapi import APIRouter, BackgroundTasks, Depends
+from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
+from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
 
 router = APIRouter()
 
