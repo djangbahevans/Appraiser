@@ -6,15 +6,15 @@ services:
       dockerfile: Dockerfile
       # args:
       #   - name=value
-    # networks:
-    #   - appraiser-net
+    env_file:
+      - ./.env
     volumes:
-      - ./:/app:ro
+      - ./:/app:rw
     container_name: appraiser
     depends_on:
       - postgres
     ports:
-      - 81:81
+      - 8000:81
 
   postgres:
     build:
