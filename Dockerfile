@@ -16,4 +16,5 @@ COPY . /app
 
 EXPOSE 81
 
-CMD ["uvicorn", "app.main:api", "--reload", "--host", "0.0.0.0", "--port", "81"]
+# CMD ["uvicorn", "app.main:api", "--reload", "--host", "0.0.0.0", "--port", "81"]
+CMD ["uvicorn", "app.main:api", "--host", "0.0.0.0", "--port", "81"]
