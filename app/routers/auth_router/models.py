@@ -3,6 +3,7 @@ from datetime import datetime
 from app import utils
 from app.database import Base
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from app.routers.user_router.models import User
 
 
 class ResetPasswordCodes(Base):

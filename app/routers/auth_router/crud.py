@@ -35,7 +35,7 @@ async def authenticate(payload: schemas.Auth, db: Session):
                     data={'email': payload.email, 'id': user.id})
                 refresh_token = utils.create_token(
                     data={'email': payload.email, 'id': user.id})
-                return {"access_token": access_token.decode("utf-8"), "refresh_token": refresh_token.decode("utf-8"), "user": user}
+                return {"access_token": access_token, "refresh_token": refresh_token, "user": user}
             else:
                 raise UnAuthorised('invalid password')
         else:
