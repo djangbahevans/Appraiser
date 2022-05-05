@@ -40,4 +40,4 @@ def create_token(data: dict, expires_delta: Optional[timedelta] = None):
 def decode_token(*, data: str):
     to_decode = data
     # GET SECRET KEY FOR TOKEN FROM CONFIG.PY
-    return jwt.decode(to_decode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    return jwt.decode(to_decode, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
