@@ -38,7 +38,7 @@ template33 = """
                             perforance appraisal will end in 3 days time.</p>
 
                             <p>Please follow the link to complete your form.
-                        <a href=http://196.43.196.108:5445/forms/end-year/{hash} target="_blank">End of Year Form</a> </p>
+                        <a href={frontend_url}/forms/end-year/{hash} target="_blank">End of Year Form</a> </p>
 
                             You are expected to access and fill the form provided in
                             <strong>three days time</strong> <br/>

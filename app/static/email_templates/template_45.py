@@ -44,7 +44,7 @@ template45 = """
                         5. Appraisee comments - {appraisees_comments_and_plan}</p></br>
                          <strong><p>Please follow the link to give your assessment .</strong></br>
                          
-                    <a href=http://196.43.196.108:5445/login target="_blank">Add comments</a> </p>
+                    <a href={frontend_url}/login target="_blank">Add comments</a> </p>
                  
 
                         Thank You. <br/>

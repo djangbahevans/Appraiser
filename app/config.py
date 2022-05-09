@@ -26,6 +26,7 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
     POSTGRES_DOMAIN: str
+    FRONTEND_URI: str
 
     class Config:
         title = 'Base Settings'

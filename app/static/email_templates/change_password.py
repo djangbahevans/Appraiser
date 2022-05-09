@@ -40,7 +40,7 @@ change = """
                         <p>Due to security reasons, we have provided you with a new link to reset your password.</p>
                        
                         <strong><p>Please fill the form by opening the link provided.</strong></br>
-                        <a href="http://196.43.196.108:5445/login/changepassword/{code}" target="_blank">click this link to reset your password</a> </p>
+                        <a href="{frontend_url}/login/changepassword/{code}" target="_blank">click this link to reset your password</a> </p>
                        
                         Please note that this link will expire 
                         <strong>in a few minutes</strong> <br/>

@@ -41,7 +41,7 @@ template35 = """
 
                     <strong><p>Please log in to the dashboard to approve.</strong></br>
                                
-                    <a href=http://196.43.196.108:5445/login target="_blank">Log in</a> </p>
+                    <a href={frontend_url}/login target="_blank">Log in</a> </p>
 
                     You are expected to review and approve the form details
                     <strong>before the start of End-Year Review today  </strong> <br/>

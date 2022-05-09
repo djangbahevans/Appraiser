@@ -47,7 +47,7 @@ template46 = """
 
                          <strong><p>Please follow the link to give your assessment .</strong></br>
                          
-                    <a href=http://196.43.196.108:5445/login target="_blank">Add Comments</a> </p>
+                    <a href={frontend_url}/login target="_blank">Add Comments</a> </p>
 
 
                         Thank You. <br/>

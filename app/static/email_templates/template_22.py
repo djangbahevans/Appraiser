@@ -45,7 +45,7 @@ template22 = """
                                     3. Supervisor's commens - {midyear_review_comment} </p></br>
 
                         <p>Please follow the link to complete your form.
-                        <a href=http://196.43.196.108:5445/forms/mid-year/{hash} target="_blank">Mid-Year Form</a> </p>
+                        <a href={frontend_url}/forms/mid-year/{hash} target="_blank">Mid-Year Form</a> </p>
                         The forms will be avilable untill the deadline for Mid-Year Review is reached
                         <strong></strong> <br/>
 

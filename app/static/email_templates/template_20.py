@@ -46,7 +46,7 @@ template20 = """
                                     4. Supervisor's comment - {annual_plan_comment} </p></br>
 
                         <p>Please follow the link to complete your form.
-                        <a href=http://196.43.196.108:5445/forms/start/{hash} target="_blank">Start of Year Form</a> </p>
+                        <a href={frontend_url}/forms/start/{hash} target="_blank">Start of Year Form</a> </p>
 
                         The forms will be avilable untill the deadline for Start of Year is reached
                         <strong></strong> <br/>

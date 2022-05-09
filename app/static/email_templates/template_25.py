@@ -48,7 +48,7 @@ template25 = """
 
                     <strong><p>Please log in to the dashboard to approve.</strong></br>
                                
-                    <a href=http://196.43.196.108:5445/login target="_blank">Log in</a> </p>
+                    <a href={frontend_url}/login target="_blank">Log in</a> </p>
 
                         The forms will be avilable for reference in the
                         <strong>Mid-Year Review process  </strong> <br/>
