@@ -28,9 +28,14 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     POSTGRES_DOMAIN: str
     FRONTEND_URI: str
 
-    @root_validator("START_URL", "MID_URL", "END_URL", "PASSWORD_URL")
-    def prepend_base_url(cls, val):
-        return cls.FRONTEND_URI + val
+    @root_validator
+    def prepend_base_url(cls, values):
+        FRONTEND_URI = values.get("FRONTEND_URI")
+        values["START_URL"] = FRONTEND_URI + values.get("START_URL")
+        values["MID_URL"] = FRONTEND_URI + values.get("MID_URL")
+        values["END_URL"] = FRONTEND_URI + values.get("END_URL")
+        values["PASSWORD_URL"] = FRONTEND_URI + values.get("PASSWORD_URL")
+        return values
 
     class Config:
         title = 'Base Settings'
@@ -40,4 +45,3 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
 # DEFINE SETTINGS
 # SETTINGS FROM CONFIG.PY WHERE VARIABLES ARE STORED IN ONE ENVIRONMENT
 settings = Settings()
-print(settings.START_URL)
