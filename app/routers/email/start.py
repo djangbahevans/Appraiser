@@ -326,8 +326,8 @@ async def background_send_33(user_hash_list) -> JSONResponse:
         message = MessageSchema(
             subject="Form Disaproved",
             recipients=[item[0]],
-            body=template20.format(email=item[0], target=item[1], lastname=item[2], staff_id=item[3], firstname=item[4], resources=item[5],
-                                   middlename=item[6], result_areas=item[7], appraisal_form_id=item[8], supervisor_email=item[9], annual_plan_comment=item[10], hash=item[11]),
+            body=template20.format(frontend_url=settings.FRONTEND_URI, email=item[0], target=item[1], lastname=item[2], staff_id=item[3], firstname=item[4], resources=item[
+                                   5], middlename=item[6], result_areas=item[7], appraisal_form_id=item[8], supervisor_email=item[9], annual_plan_comment=item[10], hash=item[11]),
             subtype="html"
         )
         await fm.send_message(message)

@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic import BaseSettings, root_validator
 
 
 class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.PY
@@ -18,15 +18,19 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
     STATIC_DIR: str = None
     API_BASE_URL: str = 'http://0.0.0.0:8000'
     COMPANY_URL: str = 'https://www.aiti-kace.com.gh'
-    START_URL: str = 'http://196.43.196.108:5445/forms/start'
-    MID_URL: str = 'http://196.43.196.108:5445/forms/mid-year'
-    END_URL: str = 'http://196.43.196.108:5445/forms/end-year'
-    PASSWORD_URL: str = 'http://196.43.196.108:5445/forms/start'
+    START_URL: str = '/forms/start'
+    MID_URL: str = '/forms/mid-year'
+    END_URL: str = '/forms/end-year'
+    PASSWORD_URL: str = '/forms/start'
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
     POSTGRES_DOMAIN: str
     FRONTEND_URI: str
+
+    @root_validator("START_URL", "MID_URL", "END_URL", "PASSWORD_URL")
+    def prepend_base_url(cls, val):
+        return cls.FRONTEND_URI + val
 
     class Config:
         title = 'Base Settings'
@@ -36,3 +40,4 @@ class Settings(BaseSettings):  # STORE VARIABLES IN ENV TO BE EXPORTED TO MAIN.P
 # DEFINE SETTINGS
 # SETTINGS FROM CONFIG.PY WHERE VARIABLES ARE STORED IN ONE ENVIRONMENT
 settings = Settings()
+print(settings.START_URL)

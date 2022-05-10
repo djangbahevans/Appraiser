@@ -111,7 +111,8 @@ async def background_send_19(user_hash_list) -> JSONResponse:
             subject="Form Approved",
             recipients=[item[0]],
             body=template37.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], overall_total=item[9], overall_performance_rating=item[10], hash=item[11]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6], core_assessments=item[7], non_core_assessments=item[8], overall_total=item[9], overall_performance_rating=item[10], hash=item[11],
+                                   frontend_url=settings.FRONTEND_URI),
             subtype="html"
         )
         await fm.send_message(message)
@@ -330,7 +331,8 @@ async def background_send_32(user_hash_list) -> JSONResponse:
             subject="Competency Details Approved",
             recipients=[item[0]],
             body=template37.format(email=item[0], lastname=item[1], staff_id=item[2], firstname=item[3],
-                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6]),
+                                   middlename=item[4], appraisal_form_id=item[5], supervisor_email=item[6],
+                                   frontend_url=settings.FRONTEND_URI),
             subtype="html"
         )
         await fm.send_message(message)
